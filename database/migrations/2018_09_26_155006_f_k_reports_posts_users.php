@@ -14,10 +14,15 @@ class FKReportsPostsUsers extends Migration
     public function up()
     {
         Schema::table('reports', function (Blueprint $table) {
-            $table->foreign('users_id')
+            $table->foreign('reporter_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreign('posts_id')
+
+            $table->foreign('reported_users_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
+            
+            $table->foreign('reported_posts_id')
                 ->references('id')->on('posts')
                 ->onDelete('cascade');
         });

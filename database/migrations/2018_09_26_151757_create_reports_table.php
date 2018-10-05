@@ -15,8 +15,9 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('posts_id')->nullable();
-            $table->unsignedInteger('users_id')->nullable();
+            $table->unsignedInteger('reporter_id');
+            $table->unsignedInteger('reported_posts_id')->nullable();
+            $table->unsignedInteger('reported_users_id')->nullable();
             $table->text('content');
             $table->tinyInteger('report_status')->default(0);
             $table->timestamps();
