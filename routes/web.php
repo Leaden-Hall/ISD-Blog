@@ -19,24 +19,23 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/ad', function () {
-    return view('admin/admin_app');
-});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin/dashboard');
     });
 
-    Route::get('users', function () {
-        return view('admin/users');
-    });
+    Route::get('users', 'UserController@index');
+    Route::get('/user/delete/{id}','UserController@destroy');
+    Route::get('/user/status/{id}','UserController@changeStatus');
+    Route::post('/user/create','UserController@store');
+
 
     Route::get('addUser', function () {
         return view('admin/addUser');
     });
 
-    Route::get('posts', function () {
+    Route::get('posts', function () { 
         return view('admin/posts');
     });
 
@@ -51,12 +50,15 @@ Route::prefix('admin')->group(function () {
     Route::get('notifications', function () {
         return view('admin/notifications');
     });
+    Route::get('announcements', 'AnnouncementsController@index');
+    Route::get('/announcement/delete/{id}','AnnouncementsController@destroy');
+    Route::post('/announcement/create','AnnouncementsController@store');
 
-    Route::get('addNotification', function () {
-        return view('admin/addNotification');
+    Route::get('addAnnouncement', function () {
+        return view('admin/addAnnouncement');
     });
 
-    Route::get('reports', function () {
-        return view('admin/reports');
-    });
+    
+    Route::get('reports', 'ReportController@index');
+    Route::get('/report/status/{id}/{status}','ReportController@changeStatus');
 });

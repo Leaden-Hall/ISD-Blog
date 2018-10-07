@@ -13,7 +13,7 @@
          </div>
          <div class="fresh-datatables">
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-               <thead>
+               <thead> 
                   <tr>
                      <th>Id</th>
                      <th>username</th>
@@ -34,32 +34,27 @@
                   </tr>
                </tfoot>
                <tbody>
+                @foreach($users as $user)
                   <tr>
-                     <td>1</td>
-                     <td>Tiger Nixon</td>
-                     <td>Nixon@gmail.com</td>
-                     <td>Admin</td>
+                     <td>{{$user->id}}</td>
+                     <td>{{$user->username}}</td>
+                     <td>{{$user->email}}</td>
+                     <td>{{$user->role->title}}</td>
+                     
                      <td>
-                        <input type="checkbox" checked="" data-toggle="switch" data-on-color="info" data-off-color="info" data-on-text="" data-off-text="">
-                        <span class="toggle"></span>
+                        @if($user->user_status == 1)         
+                            <input type="checkbox" checked data-toggle="switch" data-on-color="info" data-off-color="info" data-on-text="" data-off-text="" onchange="window.location.href='{!! url('admin/user/status/'.$user->id); !!}'">
+                            <span class="toggle"></span>   
+                        @else
+                            <input type="checkbox" data-toggle="switch" data-on-color="info" data-off-color="info" data-on-text="" data-off-text="" onchange="window.location.href='{!! url('admin/user/status/'.$user->id); !!}'">
+                            <span class="toggle"></span>  
+                        @endif
                      </td>
                      <td class="text-right">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
+                        <a id="userDelete" data-id="{{$user->id}}"  class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
                      </td>
                   </tr>
-                  <tr>
-                     <td>2</td>
-                     <td>System Architect</td>
-                     <td>Edinburgh@gm.vn</td>
-                     <td>User</td>
-                     <td>
-                        <input type="checkbox" checked="" data-toggle="switch" data-on-color="info" data-off-color="info" data-on-text="" data-off-text="">
-                        <span class="toggle"></span>
-                     </td>
-                     <td class="text-right">
-                        <a  onclick="sweet()"  class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
-                     </td>
-                  </tr>
+                  @endforeach
                </tbody>
             </table>
          </div>
@@ -69,20 +64,23 @@
 
 <script>
 	
-	function sweet() {
-            swal({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: "btn btn-info btn-fill",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonClass: "btn btn-danger btn-fill",
-                closeOnConfirm: false,
-            }, function() {
-                swal("Deleted!", "This record has been deleted.", "success");
-            });
-    }
+	// function sweet() {
+ //            swal({
+ //                title: "Are you sure?",
+ //                text: "You won't be able to revert this!",
+ //                type: "warning",
+ //                showCancelButton: true,
+ //                confirmButtonClass: "btn btn-info btn-fill",
+ //                confirmButtonText: "Yes, delete it!",
+ //                cancelButtonClass: "btn btn-danger btn-fill",
+ //                closeOnConfirm: false,
+ //            }, function() {
+ //                swal("Deleted!", "This record has been deleted.", "success");
+ //            });
+ //    }
+
+    
+
 </script>
 
 @endsection

@@ -8,7 +8,7 @@
          <div class="card-body table-striped table-no-bordered table-hover dataTable dtr-inline table-full-width">
             <div class="toolbar">
                <!--        Here you can write extra buttons/actions for the toolbar              -->
-               <a href="{!! url('admin/addNotification'); !!}" class="btn btn-success btn-wd">Add notification</a>
+               <a href="{!! url('admin/addAnnouncement'); !!}" class="btn btn-success btn-wd">Add notification</a>
             </div>
             <div class="fresh-datatables">
                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
@@ -31,21 +31,14 @@
                   <tbody>
                      @foreach($announcements as $announcement)
                      <tr>
-                        <td>{{$announcements->title}}</td>
-                        <td>{{$announcements->content}}</td>
-                        <td>{{$announcements->created_at}}</td>
+                        <td>{{$announcement->title}}</td>
+                        <td>{{$announcement->content}}</td>
+                        <td>{{date('d-m-Y', strtotime($announcement->created_at))}}</td>
                         <td class="text-right">
-                           <a onclick="demo.showSwal('warning-message-and-confirmation')" class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
+                           <a id="announDelete" data-id="{{$announcement->id}}" class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
                         </td>
                      </tr>
-                     <tr>
-                        <td>daily meeting</td>
-                        <td>Starting at 8:00 AM to discuss about content marketing work for business.</td>
-                        <td>20/09/2018</td>
-                        <td class="text-right">
-                           <a onclick="demo.showSwal('warning-message-and-confirmation')" class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
-                        </td>
-                     </tr>
+                     @endforeach
                   </tbody>
                </table>
             </div>

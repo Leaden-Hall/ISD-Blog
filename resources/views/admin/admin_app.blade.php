@@ -100,9 +100,9 @@
                         </a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link" href="{!! url('admin/notifications'); !!}">
+                        <a class="nav-link" href="{!! url('admin/announcements'); !!}">
                             <i class="fa fa-bell"></i>
-                            <p>Notification management</p>
+                            <p>Announcement management</p>
                         </a>
                     </li>
                     <li class="nav-item ">
@@ -168,7 +168,6 @@
                 </div>
             </div>
                     
-
                     
                             <div class="fixed-plugin">
                                 <div class="dropdown show-dropdown">
@@ -300,32 +299,80 @@
 </script>
 <!-- Facebook Pixel Code Don't Delete -->
 <script>
-    // ! function(f, b, e, v, n, t, s) {
-    //     if (f.fbq) return;
-    //     n = f.fbq = function() {
-    //         n.callMethod ?
-    //             n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-    //     };
-    //     if (!f._fbq) f._fbq = n;
-    //     n.push = n;
-    //     n.loaded = !0;
-    //     n.version = '2.0';
-    //     n.queue = [];
-    //     t = b.createElement(e);
-    //     t.async = !0;
-    //     t.src = v;
-    //     s = b.getElementsByTagName(e)[0];
-    //     s.parentNode.insertBefore(t, s)
-    // }(window,
-    //     document, 'script', '//connect.facebook.net/en_US/fbevents.js');
 
-    // try {
-    //     fbq('init', '111649226022273');
-    //     fbq('track', "PageView");
+    $(document).on('click', '#userDelete', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal({
+                title: "Do you want to delete this?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn btn-info btn-fill",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonClass: "btn btn-danger btn-fill",
+                closeOnConfirm: false,
+            }, function() {
+                $.ajax({
+                    type: "GET",
+                    url: "user/delete/" + id,
+                    data: {id:id},
+                    success: function (data) {
+                            // swal("Deleted!", "This record has been deleted.", "success");
+                            swal({
+                                title: "Deleted!",
+                                text: "This record has been deleted.",
+                                type: "success",
+                                confirmButtonClass: "btn btn-info btn-fill",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false,
+                            }, function() {
+                                location.reload();
+                            });
+                        }         
+                });
+            });
+    });
 
-    // } catch (err) {
-    //     console.log('Facebook Track Error:', err);
-    // }
+    $(document).on('click', '#announDelete', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal({
+                title: "Do you want to delete this?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn btn-info btn-fill",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonClass: "btn btn-danger btn-fill",
+                closeOnConfirm: false,
+            }, function() {
+                $.ajax({
+                    type: "GET",
+                    url: "announcement/delete/" + id,
+                    data: {id:id},
+                    success: function (data) {
+                            // swal("Deleted!", "This record has been deleted.", "success");
+                            swal({
+                                title: "Deleted!",
+                                text: "This record has been deleted.",
+                                type: "success",
+                                confirmButtonClass: "btn btn-info btn-fill",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false,
+                            }, function() {
+                                location.reload();
+                            });
+                        }         
+                });
+            });
+    });
+
+    $(document).on('click', '#reportContent', function (e) {
+        e.preventDefault();
+        var content = $(this).data('id');
+        swal("Reason", content);
+    });
 </script>
 
 </body>
