@@ -22,23 +22,29 @@
                   </tr>
                </thead>
                <tbody>
+                  @foreach($events as $event)
                   <tr>
                      <td>
                         <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/anni.jpg')}}" alt="...">
+                           <img src="{{asset('/storage/assets/admin/img/avatars/'.$event->banner)}}" alt="...">
                         </div>
                      </td>
                      <td class="td-name">
-                        <p class="text-primary" style="padding-top: 10px;">22th Company anniversary </p>
+                        <p class="text-primary" style="padding-top: 10px;">{{$event->title}} </p>
                      </td>
                      <td>
-                        Your business or organization has a birthday coming up. 
+                        {{$event->summary}}
                      </td>
-                     <td><a onclick="demo.showSwal('title-and-text')" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td>
+                     {{-- <td><a onclick="demo.showSwal('title-and-text')" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td> --}}
+
+                     <td><a id="eventContent" data-id="{{$event->content}}" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td>
+
                      <td style="padding-top: 58px; font-weight:bold;">
-                        17/07/2016
+                        {{date('d-m-Y', strtotime($event->created_at))}}
                      </td>
                   </tr>
+                  @endforeach
+                  {{$events->links()}}
                </tbody>
             </table>
          </div>

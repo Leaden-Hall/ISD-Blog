@@ -35,17 +35,22 @@ Route::prefix('admin')->group(function () {
         return view('admin/addUser');
     });
 
-    Route::get('posts', function () { 
-        return view('admin/posts');
-    });
+    // Route::get('posts', function () { 
+    //     return view('admin/posts');
+    // });
+    Route::get('posts', 'PostController@index');
+    Route::get('/post/delete/{id}','PostController@destroy');
+    Route::get('/post/status/{id}/{status}','PostController@changeStatus');
 
-    Route::get('events', function () {
-        return view('admin/events');
-    });
+    // Route::get('events', function () {
+    //     return view('admin/events');
+    // });
 
     Route::get('addEvent', function () {
         return view('admin/addEvent');
     });
+    Route::get('events', 'EventController@index');
+    Route::post('/event/create','EventController@store');
 
     Route::get('notifications', function () {
         return view('admin/notifications');

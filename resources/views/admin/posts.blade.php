@@ -24,131 +24,52 @@
                   </tr>
                </thead>
                <tbody>
+                  @foreach($posts as $post)
                   <tr>
                      <td>
                         <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/blog-1.jpg')}}" alt="...">
+                           {{-- <img src="{{asset('/storage/assets/admin/img/blog-2.jpg')}}" alt="..."> --}}
+                           <img src="{!! \App\Posts_image::where('post_id', $post->id)->value('url'); !!}" alt="...">
                         </div>
                      </td>
                      <td class="td-name">
-                        <a href="blogContent.html">10 Things that all designers do</a>
+                        <a href="{!! url('admin/blogContent'); !!}">{{$post->title}}</a>
                      </td>
                      <td>
-                        Most beautiful agenda for the office, really nice paper and black cover. Most beautiful agenda for the office.
+                        {{$post->summary}}
                      </td>
-                     <td class="td-number">30/08/2016</td>
+                     <td class="td-number">{{date('d-m-Y', strtotime($post->created_at))}}</td>
                      <td>
-                        <div class="btn-group" id="status" data-toggle="buttons">
-                           <label class="btn btn-default btn-on btn-xs active">
-                           <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked"><i class="fa fa-check fa-lg"></i></label>
-                           <label class="btn btn-default btn-off btn-xs ">
-                           <input type="radio" value="0" name="multifeatured_module[module_id][status]"><i class="fa fa-times fa-lg"></i></label>
-                        </div>
+                        @if($post->posts_status == 1)
+                           <div class="btn-group" id="status" data-toggle="buttons">
+                              <label class="btn btn-default btn-on btn-xs active">
+                              <input type="radio" value="1" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'" checked><i class="fa fa-check fa-lg"></i></label>
+                              <label class="btn btn-default btn-off btn-xs ">
+                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
+                           </div>
+                           @elseif($post->posts_status == 2)
+                              <div class="btn-group" id="status" data-toggle="buttons">
+                              <label class="btn btn-default btn-on btn-xs ">
+                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'"><i class="fa fa-check fa-lg"></i></label>
+                              <label class="btn btn-default btn-off btn-xs active">
+                              <input type="radio" value="2" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
+                           </div>
+                           @elseif($post->posts_status == 0)
+                              <div class="btn-group" id="status" data-toggle="buttons">
+                              <label class="btn btn-default btn-on btn-xs ">
+                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'"><i class="fa fa-check fa-lg"></i></label>
+                              <label class="btn btn-default btn-off btn-xs ">
+                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
+                           </div>
+                           @endif
                      </td>
                      <td class="">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a>
+                        {{-- <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a> --}}
+                        <a id="postDelete" data-id="{{$post->id}}"  class="btn btn-link btn-warning"><i class="fa fa-trash fa-2x" style="padding-top: 35px;"></i></a>
                      </td>
                   </tr>
-                  <tr>
-                     <td>
-                        <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/blog-2.jpg')}}" alt="...">
-                        </div>
-                     </td>
-                     <td class="td-name">
-                        <a href="blogContent.html">Back to School Offer</a>
-                     </td>
-                     <td>
-                        Design is not just what it looks like and feels like. Design is how it works.
-                     </td>
-                     <td class="td-number">17/07/2016</td>
-                     <td>
-                        <div class="btn-group" id="status" data-toggle="buttons">
-                           <label class="btn btn-default btn-on btn-xs active">
-                           <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked"><i class="fa fa-check fa-lg"></i></label>
-                           <label class="btn btn-default btn-off btn-xs ">
-                           <input type="radio" value="0" name="multifeatured_module[module_id][status]"><i class="fa fa-times fa-lg"></i></label>
-                        </div>
-                     </td>
-                     <td class="">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/blog-3.jpg')}}" alt="...">
-                        </div>
-                     </td>
-                     <td class="td-name">
-                        <a href="blogContent.html">First Dribbble Meetup in Romania</a>
-                     </td>
-                     <td>
-                        A groundbreaking Retina display. All-flash architecture. Fourth-generation Intel processors.
-                     </td>
-                     <td class="td-number">23/06/2016</td>
-                     <td>
-                        <div class="btn-group" id="status" data-toggle="buttons">
-                           <label class="btn btn-default btn-on btn-xs active">
-                           <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked"><i class="fa fa-check fa-lg"></i></label>
-                           <label class="btn btn-default btn-off btn-xs ">
-                           <input type="radio" value="0" name="multifeatured_module[module_id][status]"><i class="fa fa-times fa-lg"></i></label>
-                        </div>
-                     </td>
-                     <td class="">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/blog-4.jpg')}}" alt="...">
-                        </div>
-                     </td>
-                     <td class="td-name">
-                        <a href="">How we created our startup with 0$</a>
-                     </td>
-                     <td>
-                        A desk is a generally wooded piece of furniture and a type of useful table often used in a school or office setting for various academic or professional activities ...
-                     </td>
-                     <td class="td-number">30/06/2016</td>
-                     <td>
-                        <div class="btn-group" id="status" data-toggle="buttons">
-                           <label class="btn btn-default btn-on btn-xs active">
-                           <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked"><i class="fa fa-check fa-lg"></i></label>
-                           <label class="btn btn-default btn-off btn-xs ">
-                           <input type="radio" value="0" name="multifeatured_module[module_id][status]"><i class="fa fa-times fa-lg"></i></label>
-                        </div>
-                     </td>
-                     <td class="">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/blog-1.jpg')}}" alt="...">
-                        </div>
-                     </td>
-                     <td class="td-name">
-                        <a href="">To use or not to use Bootstrap</a>
-                     </td>
-                     <td>
-                        The Office Chair adapts naturally to virtually every body and is a permanent fixture.
-                     </td>
-                     <td class="td-number">10/05/2016</td>
-                     <td>
-                        <div class="btn-group" id="status" data-toggle="buttons">
-                           <label class="btn btn-default btn-on btn-xs active">
-                           <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked"><i class="fa fa-check fa-lg"></i></label>
-                           <label class="btn btn-default btn-off btn-xs ">
-                           <input type="radio" value="0" name="multifeatured_module[module_id][status]"><i class="fa fa-times fa-lg"></i></label>
-                        </div>
-                     </td>
-                     <td class="">
-                        <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a>
-                     </td>
-                  </tr>
+                  @endforeach
+                  {{$posts->links()}}
                </tbody>
             </table>
          </div>

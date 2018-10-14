@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Report;
+use App\Post;
+use App\Posts_image;
 
-class ReportController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +15,19 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //$reports = Report::all();
-        $reports = Report::orderBy('created_at','desc')->paginate(10);
-        return view('admin/reports', compact('reports'));
+        $posts = Post::paginate(10);
+        //$images = Posts_image::where('post_id', 4)->value('url');
+        return view('admin/posts', compact('posts'));
     }
 
-     public function changeStatus($id, $status)
+    public function changeStatus($id, $status)
     {
-        $report = Report::find($id);
+        $post = Post::find($id);
 
-           $report->report_status = $status;
-           $report->save();
+           $post->posts_status = $status;
+           $post->save();
 
-        return redirect('admin/reports');
+        return redirect('admin/posts');
     }
 
     /**
@@ -92,6 +93,9 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->back();
     }
 }

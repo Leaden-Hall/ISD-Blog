@@ -13,7 +13,7 @@
                <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                   <thead>
                      <tr> 
-                        <th>Id</th>
+                        <th>Number</th>
                         <th>Post name</th>
                         <th>Reporter</th>
                         <th>Reason</th>
@@ -22,7 +22,7 @@
                   </thead>
                   <tfoot>
                      <tr>
-                        <th>Id</th>
+                        <th>Number</th>
                         <th>Post name</th>
                         <th>Reporter</th>
                         <th>Reason</th>
@@ -32,7 +32,7 @@
                   <tbody>
                      @foreach($reports as $report)
                      <tr>
-                        <td>{{$report->id}}</td>
+                        <td class="counterCell"></td>
                         <td>{{$report->post->title}}</td>
                         <th>{{$report->user->username}}</th>
                         <td><a id="reportContent" data-id="{{$report->content}}" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td>
@@ -62,6 +62,7 @@
                         </td>
                      </tr>
                      @endforeach
+                     {{$reports->links()}}
                   </tbody>
                </table>
             </div>

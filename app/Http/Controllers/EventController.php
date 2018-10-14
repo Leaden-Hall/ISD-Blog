@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Report;
+use App\Event;
 
-class ReportController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +14,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //$reports = Report::all();
-        $reports = Report::orderBy('created_at','desc')->paginate(10);
-        return view('admin/reports', compact('reports'));
-    }
-
-     public function changeStatus($id, $status)
-    {
-        $report = Report::find($id);
-
-           $report->report_status = $status;
-           $report->save();
-
-        return redirect('admin/reports');
+        $events = Event::paginate(10);
+        return view('admin/events', compact('events'));
     }
 
     /**
@@ -47,7 +36,34 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'banner' => 'image|nullable|max:1999'
+          ]);
+
+
+        if ($request->hasfile('banner')) {
+            $fileNameWithExt = $request->file('banner')->getClientOriginalName();
+            $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME);
+            if (strlen($fileName) > 10) {
+                $fileName = substr($fileName,0,10);
+            }
+            $extension = $request->file('banner')->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'_'.$extension;
+            $path = $request->file('banner')->storeAs('public/assets/admin/img/avatars', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        Event::create([
+            'title' => $request->title,
+            'summary' => $request->summary,
+            'banner' => $fileNameToStore,
+            'content' => $request->content
+          ]);
+
+        return redirect('admin/events');
+
     }
 
     /**

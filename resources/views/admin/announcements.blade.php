@@ -39,6 +39,7 @@
                         </td>
                      </tr>
                      @endforeach
+                     {{$announcements->links()}}
                   </tbody>
                </table>
             </div>
