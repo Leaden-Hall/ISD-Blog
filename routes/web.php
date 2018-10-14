@@ -40,3 +40,4 @@ Route::get('report/add', 'ReportController@create')->name('report_add');
 
 Route::get('search', function () { return view('search/search'); })->name('search');
 
+
