@@ -20,27 +20,31 @@
 
 <body class="text-center">
 
+    @if(Session::has('authFail'))
     <div class="alert alert-danger signin-error">
-        Your credentials are incorrect, or your account has been deleted. Please try again.
+        {{Session::get('authFail')}}
     </div>
+    @endif
 
-    <form class="form-signin">
+    @include('layouts.errors')
+
+    <form class="form-signin" method="POST" action="{{ route('login') }}">
         @csrf
 
         <img class="mb-4" src="{{ asset('/storage/assets/VietPointer_logo.png') }}" alt="VietPointer_logo">
         <h1 class="h3 mb-4 font-weight-bold text-white">A Company Blog</h1>
         <div class="form-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
         </div>
 
         <div class="form-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
         </div>
-        <div class="checkbox mb-3">
-            <label class="text-white">
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
+        {{--<div class="checkbox mb-3">--}}
+            {{--<label class="text-white">--}}
+                {{--<input type="checkbox" value="remember-me"> Remember me--}}
+            {{--</label>--}}
+        {{--</div>--}}
         <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
     </form>

@@ -40,10 +40,12 @@
             <div class="col-4 d-flex justify-content-end align-items-center">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Username
+                        @if(Auth::check())
+                            {{ Auth::user()->username }}
+                        @endif
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ route('account') }}">Account</a>
+                        <a class="dropdown-item" href="{{ route('account', Auth::user()->id) }}">Account</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sign Out</a>
 
@@ -65,7 +67,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts') }}">Posts</a>
+                    <a class="nav-link" href="{{ route('posts', Auth::user()->id) }}">Posts</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('events') }}">Events</a>
@@ -74,7 +76,7 @@
                     <a class="nav-link" href="{{ route('announcements') }}">Announcements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('reports') }}">Reports</a>
+                    <a class="nav-link" href="{{ route('reports', Auth::user()->id) }}">Reports</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

@@ -63,25 +63,14 @@
 
 @section("aside-announcement")
     <div class="p-3 mb-3 bg-light rounded">
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
-
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
+        @foreach($recentAnnouncements as $recentAnnouncement)
+            <div class="mb-4">
+                <h4 class="font-italic">
+                    <a class="text-dark" href="{{ route('announcement', $recentAnnouncement->id) }}">{{ $recentAnnouncement->title }}</a>
+                </h4>
+                <div class="mb-1 text-muted">{{ $recentAnnouncement->created_at->format('F jS') }}</div>
+            </div>
+        @endforeach
     </div>
 @endsection
 

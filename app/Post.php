@@ -15,4 +15,8 @@ class Post extends Model
         'posts_status',
         'users_id'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\User', 'users_id', 'id');
+    }
 }

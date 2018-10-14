@@ -31,89 +31,21 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($reports as $report)
         <tr>
-            <th scope="row">1</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
+            <th scope="row">{{ $report->id }}</th>
+            <td class="text-center">{{ $report->reported_posts_id }}</td>
+            <td class="text-center">{{ $report->reported_users_id }}</td>
             <td class="text-center">
                 <span class="badge badge-primary">Pending</span>
                 <span class="badge badge-success">Approved</span>
                 <span class="badge badge-danger">Canceled</span>
             </td>
             <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
+                <a href="{{ route('report', $report->id) }}" class="btn btn-outline-warning">View</a>
             </td>
         </tr>
-
-        <tr>
-            <th scope="row">2</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
-            <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
-            </td>
-            <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
-            </td>
-        </tr>
-
-        <tr>
-            <th scope="row">3</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
-            <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
-            </td>
-            <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
-            </td>
-        </tr>
-
-        <tr>
-            <th scope="row">4</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
-            <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
-            </td>
-            <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
-            </td>
-        </tr>
-
-        <tr>
-            <th scope="row">5</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
-            <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
-            </td>
-            <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
-            </td>
-        </tr>
-
-        <tr>
-            <th scope="row">6</th>
-            <td class="text-center">Post_id</td>
-            <td class="text-center">Username</td>
-            <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
-            </td>
-            <td class="text-right">
-                <a href="{{ route('report') }}" class="btn btn-outline-warning">View</a>
-            </td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
 
@@ -133,33 +65,21 @@
 @section("aside-event")
     <div class="p-2 mb-3 bg-dark rounded text-white">
         <h3 class="font-italic">
-            <a href="{{ route('event') }}" class="text-white">Big Events</a>
+            <a href="{{ route('event', $recentEvents->id) }}" class="text-white">{{ $recentEvents->title }}</a>
         </h3>
-        <p class="text-justify">Big events summary for preview text. This is a wider card with supporting text below as
-            a natural lead-in to additional content</p>
+        <p class="text-justify">{{ $recentEvents->summary }}</p>
     </div>
 @endsection
 
 @section("aside-announcement")
     <div class="p-3 mb-3 bg-light rounded">
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
-
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
+        @foreach($recentAnnouncements as $recentAnnouncement)
+            <div class="mb-4">
+                <h4 class="font-italic">
+                    <a class="text-dark" href="{{ route('announcement', $recentAnnouncement->id) }}">{{ $recentAnnouncement->title }}</a>
+                </h4>
+                <div class="mb-1 text-muted">{{ $recentAnnouncement->created_at->format('F jS') }}</div>
+            </div>
+        @endforeach
     </div>
 @endsection
