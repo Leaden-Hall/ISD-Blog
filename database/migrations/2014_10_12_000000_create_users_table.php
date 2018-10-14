@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->boolean('is_notified')->default(0);
-            $table->string('avatar', 25);
+            $table->string('avatar', 255);
             $table->string('phone', 12);
             $table->tinyInteger('gender')->default(2);
             $table->tinyInteger('user_status')->default(1);

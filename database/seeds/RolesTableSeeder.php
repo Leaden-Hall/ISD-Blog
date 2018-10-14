@@ -13,12 +13,12 @@ class RolesTableSeeder extends Seeder
     {
         DB::table('roles')->insert([
             'title' => "admin",
-            'description' => str_random(25)
+            'description' => str_random(15)
         ]);
 
         DB::table('roles')->insert([
             'title' => "user",
-            'description' => str_random(25)
+            'description' => str_random(15)
         ]);
     }
 }

@@ -13,18 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RolesTableSeeder::class);
+//        $this->call(RolesTableSeeder::class);
 
-        factory(App\Announcement::class, 10)->create();
+//        factory(App\Announcement::class, 10)->create();
 
-        factory(App\Event::class, 10)->create();
+//        factory(App\Event::class, 10)->create();
 
-//        factory(App\User::class, 10)->create()
-//        ->each(function ($user) {
-//            $user->posts()->save(factory(App\Post::class)->make());
-//            $user->comments()->save(factory(App\Comment::class)->make());
-//            $user->reports()->save(factory(App\Report::class->make())
-//        });
+//        factory(App\User::class, 10)->create();
+
+//        factory(App\Post::class, 10)->create();
+
+//        factory(App\Report::class, 10)->create();
 
     }
 }

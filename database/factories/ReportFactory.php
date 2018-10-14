@@ -7,8 +7,8 @@ $factory->define(App\Report::class, function (Faker $faker) {
 
         'reporter_id' => $faker->numberBetween(1, 10),
         'reported_posts_id' => $faker->numberBetween(1, 10),
-        'reported_users_id' => '',
-        'content' => $faker->paragraph(5),
+        'reported_users_id' => null,
+        'content' => $faker->paragraph(7),
         'report_status' => '2'
     ];
 });
