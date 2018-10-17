@@ -8,6 +8,7 @@ class Announcement extends Model
 {
     
     protected $fillable = [
-        'title', 'content',
+        'title',
+        'content'
     ];
 }

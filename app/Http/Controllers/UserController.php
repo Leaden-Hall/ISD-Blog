@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return view('admin/addUser');
     }
 
     public function changeStatus($id)
@@ -38,8 +38,9 @@ class UserController extends Controller
     public function store(Request $request)
     { 
           $this->validate($request, [
-            'username' => 'min:4|max:20',
-            'password' => 'confirmed|min:6'
+            'username' => 'min:4|max:20|unique:users,username',
+            'password' => 'confirmed|min:6',
+            'email'    => 'unique:users,email'
           ]);
 
           $this->validate($request, [
@@ -60,12 +61,16 @@ class UserController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
+        $password = md5($request->password);
+        
         $users = new User;
         $users->username = $request->username;
-        $users->password = $request->password;
+        $users->password = $password;
         $users->email    = $request->email;
         $users->avatar   = $fileNameToStore;
-        $users->role_id = $request->role;
+        $users->phone    = $request->phone;
+        $users->gender   = $request->gender;
+        $users->roles_id = $request->role;
         $users->save();
 
       return redirect('admin/users');

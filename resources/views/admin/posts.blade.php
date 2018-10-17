@@ -28,8 +28,9 @@
                   <tr>
                      <td>
                         <div class="img-container">
-                           {{-- <img src="{{asset('/storage/assets/admin/img/blog-2.jpg')}}" alt="..."> --}}
-                           <img src="{!! \App\Posts_image::where('post_id', $post->id)->value('url'); !!}" alt="...">
+                           @php ($image = \App\PostImage::where('posts_id', $post->id)->value('url'))
+                           <img src="{{asset('/storage/assets/admin/img/'.$image)}}" alt="...">
+                           {{-- <img src="{!! \App\PostImage::where('posts_id', $post->id)->value('url'); !!}" alt="..."> --}}
                         </div>
                      </td>
                      <td class="td-name">

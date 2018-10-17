@@ -15,7 +15,6 @@
             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                <thead> 
                   <tr>
-                     <th>Id</th>
                      <th>username</th>
                      <th>email</th>
                      <th>Role</th>
@@ -25,7 +24,6 @@
                </thead>
                <tfoot>
                   <tr>
-                     <th>Id</th>
                      <th>username</th>
                      <th>email</th>
                      <th>Role</th>
@@ -36,10 +34,9 @@
                <tbody>
                 @foreach($users as $user)
                   <tr>
-                     <td>{{$user->id}}</td>
                      <td>{{$user->username}}</td>
                      <td>{{$user->email}}</td>
-                     <td>{{$user->role->title}}</td>
+                     <td>{!! \App\Role::where('id', $user->roles_id)->value('title'); !!}</td>
                      
                      <td>
                         @if($user->user_status == 1)         

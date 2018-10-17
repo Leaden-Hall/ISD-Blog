@@ -94,7 +94,7 @@
                                  <option value="ms">Female</option>
                                  <option value="ca">Unknown</option>
                               </select> --}}
-                              {{Form::select('Gender', ['M' => 'Male', 'F' => 'Female', 'U' => 'Unknown'], 'M', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
+                              {{Form::select('gender', ['0' => 'Male', '1' => 'Female', '2' => 'Unknown'], '0', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
                            </div>
                         </div>
                      </div>
@@ -107,7 +107,7 @@
                                  <option selected="" disabled="">- Admin -</option>
                                  <option value="1.1">User</option>
                               </select> --}}
-                              {{Form::select('role', ['1' => 'Admin', '2' => 'User'], '1', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
+                              {{Form::select('role', ['1' => 'User', '2' => 'Admin'], '1', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
                            </div>
                         </div>
                      </div>
@@ -135,16 +135,18 @@
    </div>
 </div>
 
+<script>
+   $(document).ready(function(){    
+    //Check if the current URL contains '#'
+    if(document.URL.indexOf("#")==-1){
+        // Set the URL to whatever it was plus "#".
+        url = document.URL+"#";
+        location = "#";
 
-{{-- <script type="text/javascript">
-    $(document).ready(function() {
-        // Init Wizard
-        // demo.initLBDWizard();
-    });
-
-    // $("#pas").validate();
-    // $("#repas").validate();
-    // $("#username").validate();
-</script> --}}
+        //Reload the page
+        location.reload(true);
+    }
+});
+</script>
 
 @endsection

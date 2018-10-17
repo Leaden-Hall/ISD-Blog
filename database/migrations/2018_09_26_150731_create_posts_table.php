@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('summary')->nullable();
             $table->text('content');
             $table->tinyInteger('posts_status')->default(0);
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('users_id');
             $table->timestamps();
         });
     }

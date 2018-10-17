@@ -33,8 +33,10 @@
                      @foreach($reports as $report)
                      <tr>
                         <td class="counterCell"></td>
-                        <td>{{$report->post->title}}</td>
-                        <th>{{$report->user->username}}</th>
+                        {{-- <td>{{$report->post->title}}</td> --}}
+                        <td>{!! \App\Post::where('id', $report->reported_posts_id)->value('title'); !!}</td>
+                        {{-- <th>{{$report->user->username}}</th> --}}
+                        <td>{!! \App\User::where('id', $report->reporter_id)->value('username'); !!}</td>
                         <td><a id="reportContent" data-id="{{$report->content}}" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td>
                         <td>
                            @if($report->report_status == 1)

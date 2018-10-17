@@ -52,10 +52,10 @@
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+                    <a href="{!! url('admin'); !!}" class="simple-text logo-mini">
                         
                     </a>
-                    <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+                    <a href="{!! url('admin'); !!}" class="simple-text logo-normal">
                         VIETPOINTER
                     </a>
                 </div>
@@ -66,10 +66,10 @@
 <div class="info ">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
                             <span>Thanh Nguyen
-                                <b class="caret"></b>
+                                {{-- <b class="caret"></b> --}}
                             </span>
                         </a>
-                        <div class="collapse" id="collapseExample">
+                        {{-- <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li>
                                     <a class="profile-dropdown" href="#pablo">
@@ -79,7 +79,7 @@
                                 </li>
                                 
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <ul class="nav">
@@ -151,7 +151,7 @@
                                 </div>
                             </form>
                         </ul>
-                        <ul class="navbar-nav">
+                        {{-- <ul class="navbar-nav">
                             
                             <li class="dropdown nav-item" style="margin-right: 50px;">
                                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -166,7 +166,7 @@
                                     <a class="dropdown-item" href="#">Notification 4</a>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </nav>

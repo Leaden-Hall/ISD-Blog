@@ -30,21 +30,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/user/status/{id}','UserController@changeStatus');
     Route::post('/user/create','UserController@store');
 
-
-    Route::get('addUser', function () {
-        return view('admin/addUser');
-    });
-
-    // Route::get('posts', function () { 
-    //     return view('admin/posts');
+    Route::get('addUser', 'UserController@create');
+    // Route::get('addUser', function () {
+    //     return view('admin/addUser');
     // });
+
+
     Route::get('posts', 'PostController@index');
     Route::get('/post/delete/{id}','PostController@destroy');
     Route::get('/post/status/{id}/{status}','PostController@changeStatus');
 
-    // Route::get('events', function () {
-    //     return view('admin/events');
-    // });
 
     Route::get('addEvent', function () {
         return view('admin/addEvent');
