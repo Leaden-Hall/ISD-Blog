@@ -17,6 +17,7 @@
                         <th>title</th>
                         <th>content</th>
                         <th>start date</th>
+                        <th class="disabled-sorting text-right">Edit</th>
                         <th class="disabled-sorting text-right">Delete</th>
                      </tr>
                   </thead>
@@ -25,6 +26,7 @@
                         <th>title</th>
                         <th>content</th>
                         <th>start date</th>
+                        <th class="disabled-sorting text-right">Edit</th>
                         <th class="disabled-sorting text-right">Delete</th>
                      </tr>
                   </tfoot>
@@ -34,6 +36,9 @@
                         <td>{{$announcement->title}}</td>
                         <td>{{$announcement->content}}</td>
                         <td>{{date('d-m-Y', strtotime($announcement->created_at))}}</td>
+                        <td class="text-right">
+                           <a href="{!! url('admin/announcement/edit/'.$announcement->id); !!}" class="btn btn-link btn-warning"><i class="fa fa-edit fa-lg"></i></a>
+                        </td>
                         <td class="text-right">
                            <a id="announDelete" data-id="{{$announcement->id}}" class="btn btn-link btn-warning"><i class="fa fa-trash fa-lg"></i></a>
                         </td>

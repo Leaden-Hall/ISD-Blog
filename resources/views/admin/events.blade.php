@@ -17,7 +17,9 @@
                      <th class="text-center">TITLE</th>
                      <th class="text-center th-description">SUMMARY</th>
                      <th class="text-center">CONTENT</th>
-                     <th class="disabled-sorting text-center">START DATE</th>
+                     <th class="disabled-sorting text-center">DATE</th>
+                     <th class="disabled-sorting text-center">Edit</th>
+                     <th class="disabled-sorting text-center">Delete</th>
                      <th></th>
                   </tr>
                </thead>
@@ -35,12 +37,23 @@
                      <td>
                         {{$event->summary}}
                      </td>
-                     {{-- <td><a onclick="demo.showSwal('title-and-text')" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td> --}}
 
-                     <td><a id="eventContent" data-id="{{$event->content}}" class="btn btn-link btn-info like"><i class="fa fa-arrow-circle-right fa-lg"></i></a></td>
+                     <td>
+                        <a id="eventContent" data-id="{{$event->content}}" class="btn btn-link btn-info like">
+                           <i class="fa fa-arrow-circle-right fa-lg"></i>
+                        </a>
+                     </td>
 
-                     <td style="padding-top: 58px; font-weight:bold;">
-                        {{date('d-m-Y', strtotime($event->created_at))}}
+                     <td style="padding-top: 8px; font-weight:bold;">
+                        {{date('d/m/Y', strtotime($event->created_at))}}
+                     </td>
+
+                     <td class="text-right">
+                        <a href="{!! url('admin/event/edit/'.$event->id); !!}" class="btn btn-link btn-warning"><i class="fa fa-edit fa-2x" style="padding-top: 7px;"></i></a>
+                     </td>
+
+                     <td class="text-right">
+                        <a id="eventDelete" data-id="{{$event->id}}" class="btn btn-link btn-warning"><i class="fa fa-trash fa-2x" style="padding-top: 35px;"></i></a>
                      </td>
                   </tr>
                   @endforeach

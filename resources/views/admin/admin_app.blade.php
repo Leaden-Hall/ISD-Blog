@@ -27,15 +27,6 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-NKDMSK6');</script>
     <!-- End Google Tag Manager -->
-    <style type="text/css" media="screen">
-        table {
-            counter-reset: tableCount;     
-        }
-        .counterCell:before {              
-            content: counter(tableCount); 
-            counter-increment: tableCount; 
-        }
-    </style>
     </head>
 
     <body>
@@ -361,7 +352,6 @@
                     url: "post/delete/" + id,
                     data: {id:id},
                     success: function (data) {
-                            // swal("Deleted!", "This record has been deleted.", "success");
                             swal({
                                 title: "Deleted!",
                                 text: "This record has been deleted.",
@@ -395,7 +385,39 @@
                     url: "announcement/delete/" + id,
                     data: {id:id},
                     success: function (data) {
-                            // swal("Deleted!", "This record has been deleted.", "success");
+                            swal({
+                                title: "Deleted!",
+                                text: "This record has been deleted.",
+                                type: "success",
+                                confirmButtonClass: "btn btn-info btn-fill",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false,
+                            }, function() {
+                                location.reload();
+                            });
+                        }         
+                });
+            });
+    });
+
+    $(document).on('click', '#eventDelete', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        swal({
+                title: "Do you want to delete this?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn btn-info btn-fill",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonClass: "btn btn-danger btn-fill",
+                closeOnConfirm: false,
+            }, function() {
+                $.ajax({
+                    type: "GET",
+                    url: "event/delete/" + id,
+                    data: {id:id},
+                    success: function (data) {
                             swal({
                                 title: "Deleted!",
                                 text: "This record has been deleted.",

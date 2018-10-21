@@ -30,7 +30,6 @@
                         <div class="img-container">
                            @php ($image = \App\PostImage::where('posts_id', $post->id)->value('url'))
                            <img src="{{asset('/storage/assets/admin/img/'.$image)}}" alt="...">
-                           {{-- <img src="{!! \App\PostImage::where('posts_id', $post->id)->value('url'); !!}" alt="..."> --}}
                         </div>
                      </td>
                      <td class="td-name">
@@ -39,30 +38,35 @@
                      <td>
                         {{$post->summary}}
                      </td>
-                     <td class="td-number">{{date('d-m-Y', strtotime($post->created_at))}}</td>
+                     <td class="td-number" style="font-weight:bold;">{{date('d/m/Y', strtotime($post->created_at))}}</td>
                      <td>
                         @if($post->posts_status == 1)
-                           <div class="btn-group" id="status" data-toggle="buttons">
+                           @php ($value1 = 1)
+                           @php ($value2 = 0)
+                        @elseif($post->posts_status == 2)
+                           @php ($value1 = 0)
+                           @php ($value2 = 2)
+                        @elseif($post->posts_status == 0)
+                           @php ($value1 = 0)
+                           @php ($value2 = 0)
+                        @endif
+
+                        <div class="btn-group" id="status" data-toggle="buttons">
+                           @if($post->posts_status == 1)
                               <label class="btn btn-default btn-on btn-xs active">
-                              <input type="radio" value="1" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'" checked><i class="fa fa-check fa-lg"></i></label>
-                              <label class="btn btn-default btn-off btn-xs ">
-                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
-                           </div>
-                           @elseif($post->posts_status == 2)
-                              <div class="btn-group" id="status" data-toggle="buttons">
-                              <label class="btn btn-default btn-on btn-xs ">
-                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'"><i class="fa fa-check fa-lg"></i></label>
-                              <label class="btn btn-default btn-off btn-xs active">
-                              <input type="radio" value="2" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
-                           </div>
-                           @elseif($post->posts_status == 0)
-                              <div class="btn-group" id="status" data-toggle="buttons">
-                              <label class="btn btn-default btn-on btn-xs ">
-                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'"><i class="fa fa-check fa-lg"></i></label>
-                              <label class="btn btn-default btn-off btn-xs ">
-                              <input type="radio" value="0" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
-                           </div>
+                           @else
+                              <label class="btn btn-default btn-on btn-xs">
                            @endif
+                           <input type="radio" value="$value1" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/1'); !!}'" checked><i class="fa fa-check fa-lg"></i></label>
+
+                           @if($post->posts_status == 2)
+                              <label class="btn btn-default btn-off btn-xs active">
+                           @else
+                              <label class="btn btn-default btn-off btn-xs">
+                           @endif
+                           <input type="radio" value="$value2" name="" onchange="window.location.href='{!! url('admin/post/status/'.$post->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
+                        </div>
+                           
                      </td>
                      <td class="">
                         {{-- <a onclick="demo.showSwal('warning-message-and-confirmation')"  style="padding-top: 43px;" class="btn btn-link btn-warning delete"><i class="fa fa-trash fa-2x"></i></a> --}}

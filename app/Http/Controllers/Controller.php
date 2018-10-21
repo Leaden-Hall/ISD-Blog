@@ -6,8 +6,26 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function saveImage(Request $request, $imageName)
+    {
+    	$fileNameToStore = 'noimage.jpg';
+        if ($request->hasfile($imageName)) {
+            $fileNameWithExt = $request->file($imageName)->getClientOriginalName();
+            $fileName = pathinfo( $fileNameWithExt, PATHINFO_FILENAME);
+            if (strlen($fileName) > 10) {
+                $fileName = substr($fileName,0,10);
+            }
+            $extension = $request->file($imageName)->getClientOriginalExtension();
+            $fileNameToStore = $fileName.'_'.time().'_'.$extension;
+            $path = $request->file($imageName)->storeAs('public/assets/admin/img/avatars', $fileNameToStore);
+        } 
+
+        return $fileNameToStore;
+    }
 }
