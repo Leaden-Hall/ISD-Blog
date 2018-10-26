@@ -44,7 +44,7 @@
                         </td>
                      </tr>
                      @endforeach
-                     {{$announcements->links()}}
+                     {{$announcements->onEachSide(1)->links()}}
                   </tbody>
                </table>
             </div>

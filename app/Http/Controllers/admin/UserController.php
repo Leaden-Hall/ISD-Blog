@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\User;
 use Illuminate\Http\Request;
@@ -25,13 +25,13 @@ class UserController extends Controller
 
         if ($user->user_status == 1) {
            $user->user_status = 0;
-           $user->save();
         }else{
            $user->user_status = 1;
-           $user->save(); 
         }
 
-        return redirect('admin/users');
+        $user->save(); 
+        //return redirect('admin/users');
+        return response()->json(true);
     }
 
     public function store(Request $request)
@@ -76,11 +76,10 @@ class UserController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy( $id)
     {
         $user = User::find($id);
         $user->delete();
-
-        return redirect()->back();
+        return response()->json(true);
     }
 }

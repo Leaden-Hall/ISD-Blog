@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Post;
@@ -21,45 +21,14 @@ class PostController extends Controller
         $post->posts_status = $status;
         $post->save();
 
-        return redirect('admin/posts');
+        return response()->json(true);
     }
-
-
-    public function create()
-    {
-        //
-    }
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-
-    
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
     
     public function destroy($id)
     {
         $post = Post::find($id);
         $post->delete();
 
-        return redirect()->back();
+        return response()->json(true);
     }
 }

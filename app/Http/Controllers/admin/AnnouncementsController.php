@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Announcement;
 use Illuminate\Http\Request;
@@ -56,6 +56,6 @@ class AnnouncementsController extends Controller
         $announcement = Announcement::find($id);
         $announcement->delete();
 
-        return redirect()->back();
+        return response()->json(true);
     }
 }

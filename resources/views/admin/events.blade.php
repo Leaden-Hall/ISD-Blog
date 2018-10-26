@@ -28,7 +28,7 @@
                   <tr>
                      <td>
                         <div class="img-container">
-                           <img src="{{asset('/storage/assets/admin/img/avatars/'.$event->banner)}}" alt="...">
+                           <img src="{{asset('/storage/storage/images/events/'.$event->banner)}}" alt="...">
                         </div>
                      </td>
                      <td class="td-name">
@@ -57,7 +57,7 @@
                      </td>
                   </tr>
                   @endforeach
-                  {{$events->links()}}
+                  {{$events->onEachSide(1)->links()}}
                </tbody>
             </table>
          </div>

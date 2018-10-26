@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Report;
@@ -20,7 +20,7 @@ class ReportController extends Controller
         $report->report_status = $status;
         $report->save();
 
-        return redirect('admin/reports');
+        return response()->json(true);
     }
 
 }

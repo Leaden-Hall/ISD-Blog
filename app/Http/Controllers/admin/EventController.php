@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Event;
@@ -72,6 +72,6 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->delete();
 
-        return redirect()->back();
+        return response()->json(true);
     }
 }

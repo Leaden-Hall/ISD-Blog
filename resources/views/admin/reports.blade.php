@@ -36,12 +36,12 @@
                         <td>                          
                            @if($report->report_status == 1)
                               @php ($value1 = 1)
-                              @php ($value2 = 0)
+                              @php ($value2 = 2)
                            @elseif($report->report_status == 2)
-                              @php ($value1 = 0)
+                              @php ($value1 = 2)
                               @php ($value2 = 2)
                            @elseif($report->report_status == 0)
-                              @php ($value1 = 0)
+                              @php ($value1 = 2)
                               @php ($value2 = 0)
                            @endif
 
@@ -51,19 +51,19 @@
                               @else
                                  <label class="btn btn-default btn-on btn-xs">
                               @endif
-                              <input type="radio" value="$value1" name="" onchange="window.location.href='{!! url('admin/report/status/'.$report->id.'/1'); !!}'" checked><i class="fa fa-check fa-lg"></i></label>
+                              <input type="radio" value="$value1" onchange="changeReportStatus({!! $report->id !!}, 1)" checked><i class="fa fa-check fa-lg"></i></label>
 
-                              @if($report->report_status == 2)
+                              @if($report->report_status == 0)
                                  <label class="btn btn-default btn-off btn-xs active">
                               @else
                                  <label class="btn btn-default btn-off btn-xs">
                               @endif
-                              <input type="radio" value="$value2" name="" onchange="window.location.href='{!! url('admin/report/status/'.$report->id.'/2'); !!}'"><i class="fa fa-times fa-lg"></i></label>
+                              <input type="radio" value="$value2" onchange="changeReportStatus({!! $report->id !!}, 0)"><i class="fa fa-times fa-lg"></i></label>
                            </div>
                         </td>
                      </tr>
                      @endforeach
-                     {{$reports->links()}}
+                     {{$reports->onEachSide(1)->links()}}
                   </tbody>
                </table>
             </div>

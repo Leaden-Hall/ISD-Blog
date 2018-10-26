@@ -21,34 +21,33 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('admin/dashboard');
-    });
 
-    Route::get('users', 'UserController@index');
-    Route::get('/user/delete/{id}','UserController@destroy');
-    Route::get('/user/status/{id}','UserController@changeStatus');
-    Route::post('/user/create','UserController@store');
-    Route::get('addUser', 'UserController@create');
+    Route::get('/', 'admin\HomeController@index');
 
-    Route::get('posts', 'PostController@index');
-    Route::get('/post/delete/{id}','PostController@destroy');
-    Route::get('/post/status/{id}/{status}','PostController@changeStatus');
+    Route::get('users', 'admin\UserController@index');
+    Route::get('/user/delete/{id}','admin\UserController@destroy');
+    Route::get('/user/status/{id}','admin\UserController@changeStatus');
+    Route::post('/user/create','admin\UserController@store');
+    Route::get('addUser', 'admin\UserController@create');
 
-    Route::get('events', 'EventController@index');
-    Route::get('addEvent', 'EventController@create');
-    Route::post('/event/create','EventController@store');
-    Route::get('/event/edit/{id}','EventController@edit');
-    Route::put('/event/update/{id}','EventController@update');
-    Route::get('/event/delete/{id}','EventController@destroy');
+    Route::get('posts', 'admin\PostController@index');
+    Route::get('/post/delete/{id}','admin\PostController@destroy');
+    Route::get('/post/status/{id}/{status}','admin\PostController@changeStatus');
 
-    Route::get('announcements', 'AnnouncementsController@index');
-    Route::get('/announcement/delete/{id}','AnnouncementsController@destroy');
-    Route::get('addAnnouncement', 'AnnouncementsController@create');
-    Route::post('/announcement/create','AnnouncementsController@store');
-    Route::get('/announcement/edit/{id}','AnnouncementsController@edit');
-    Route::put('/announcement/update/{id}','AnnouncementsController@update');
+    Route::get('events', 'admin\EventController@index');
+    Route::get('addEvent', 'admin\EventController@create');
+    Route::post('/event/create','admin\EventController@store');
+    Route::get('/event/edit/{id}','admin\EventController@edit');
+    Route::put('/event/update/{id}','admin\EventController@update');
+    Route::get('/event/delete/{id}','admin\EventController@destroy');
+
+    Route::get('announcements', 'admin\AnnouncementsController@index');
+    Route::get('/announcement/delete/{id}','admin\AnnouncementsController@destroy');
+    Route::get('addAnnouncement', 'admin\AnnouncementsController@create');
+    Route::post('/announcement/create','admin\AnnouncementsController@store');
+    Route::get('/announcement/edit/{id}','admin\AnnouncementsController@edit');
+    Route::put('/announcement/update/{id}','admin\AnnouncementsController@update');
     
-    Route::get('reports', 'ReportController@index');
-    Route::get('/report/status/{id}/{status}','ReportController@changeStatus');
+    Route::get('reports', 'admin\ReportController@index');
+    Route::get('/report/status/{id}/{status}','admin\ReportController@changeStatus');
 });

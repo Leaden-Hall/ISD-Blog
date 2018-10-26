@@ -41,17 +41,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    
-    public function role(){
-	    return $this->belongsTo('App\Role');
-	}
-
-	// protected $fillable = [
- //        'username', 'email', 'password',
- //    ];
-
-    public function reports(){
-    	return $this->hasMany('App\Report');
-    }
-
 }
