@@ -40,7 +40,7 @@
             {{-- <a style="position: relative; top: -110px; color: white; " type="submit" class="btn btn-info" onclick="demo.showSwal('success-message')">Add</a> --}}
          </div>
       </div>
-   </form>
+   {{-- </form> --}}
 </div>
 
 @endsection

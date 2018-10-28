@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class AnnouncementsController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $announcements = Announcement::orderBy('created_at','desc')->paginate(10);

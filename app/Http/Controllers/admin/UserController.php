@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $users = User::paginate(10);
@@ -40,9 +46,9 @@ class UserController extends Controller
         
         $users = new User;
         $users->username = $request->username;
-        $users->password = md5($request->password);
+        $users->password = bcrypt($request->password);
         $users->email    = $request->email;
-        $users->avatar   = $this->saveImage($request, 'avatar');
+        $users->avatar   = $this->saveImage($request, 'avatar', 'users');
         $users->phone    = $request->phone;
         $users->gender   = $request->gender;
         $users->roles_id = $request->role;

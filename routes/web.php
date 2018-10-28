@@ -23,6 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function () {
 
     Route::get('/', 'admin\HomeController@index');
+    Route::get('login', 'admin\LoginController@index');
+    Route::post('login', 'admin\LoginController@checkLogin');
+    Route::get('logout', 'admin\LoginController@logout');
 
     Route::get('users', 'admin\UserController@index');
     Route::get('/user/delete/{id}','admin\UserController@destroy');

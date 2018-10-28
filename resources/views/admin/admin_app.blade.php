@@ -124,6 +124,9 @@
                      </div>
                   </form>
                </ul>
+               <ul class="navbar-nav">
+                  <a href="{!! url('admin/logout'); !!}" class="btn btn-info">Log out</a>
+               </ul>
             </div>
          </div>
       </nav>
