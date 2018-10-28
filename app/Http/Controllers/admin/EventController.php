@@ -29,13 +29,15 @@ class EventController extends Controller
     {
 
         $this->validate($request, [
+            'title' => 'min:6|max:100',
+            'summary' => 'min:6|max:200',
             'banner' => 'image|nullable|max:1999'
-          ]);
+        ]);
 
         Event::create([
             'title' => $request->title,
             'summary' => $request->summary,
-            'banner' => $this->saveImage($request, 'banner'),
+            'banner' => $this->saveImage($request, 'banner', 'events'),
             'content' => $request->content
           ]);
 
@@ -59,13 +61,19 @@ class EventController extends Controller
     
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'min:6|max:100',
+            'summary' => 'min:6|max:200',
+            'banner' => 'image|nullable|max:1999'
+        ]);
+        
         $input = $request->all();
         $event = Event::find($id);
         $event->title = $input["title"];
         $event->summary = $input["summary"];
         $event->content = $input["content"];
-        if ($this->saveImage($request, 'banner') != 'noimage.jpg') {
-            $event->banner = $this->saveImage($request, 'banner');
+        if ($this->saveImage($request, 'banner', 'events') != 'noimage.jpg') {
+            $event->banner = $this->saveImage($request, 'banner', 'events');
         }
         $event->save();
 

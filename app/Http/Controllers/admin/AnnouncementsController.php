@@ -26,6 +26,11 @@ class AnnouncementsController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'min:6|max:60',
+            'content' => 'min:6|max:150'
+        ]);
+
         Announcement::create([
         'title' => $request->title,
         'content' => $request->content
@@ -47,6 +52,11 @@ class AnnouncementsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'title' => 'min:6|max:60',
+            'content' => 'min:6|max:150'
+        ]);
+
         $input = $request->all();
         $announcement = Announcement::find($id);
         $announcement->title = $input["title"];

@@ -22,7 +22,7 @@
                <div class="form-group has-label">
                   {{Form::label('banner','Banner', array('class' => '')) }}
                   {{Form::file('banner', array('class' => 'form-control', 'onchange' => 'readURL(this);', 'accept' => 'image/*')) }}
-                  <img style="padding-left: 230px; padding-top: 7px;" id="blah" src="{{asset('/storage/assets/admin/img/avatars/'.$event->banner)}}" width="500" height="200" alt="Your image" />
+                  <img style="padding-left: 230px; padding-top: 7px;" id="blah" src="{{asset('/storage/storage/images/events/'.$event->banner)}}" width="500" height="200" alt="Your image" />
                </div>
                <div class="form-group has-label">
                   {{Form::label('content','Content', array('class' => '')) }}
