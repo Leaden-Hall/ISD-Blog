@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+
     const CANCELED = 0;
 
     const PENDING = 1;
@@ -14,6 +15,7 @@ class Report extends Model
 
     protected $table = "reports";
 
+
     protected $fillable = [
         'reporter_id',
         'reported_posts_id',
@@ -21,6 +23,7 @@ class Report extends Model
         'content',
         'report_status'
     ];
+
 
     public function isCanceled() {
         if($this->report_status == self::CANCELED) {
@@ -44,5 +47,14 @@ class Report extends Model
         }
 
         return false;
+    }
+
+    public function user(){
+    	return $this->belongsTo('App\User');
+    }
+
+    public function post(){
+    	return $this->belongsTo('App\Post');
+
     }
 }

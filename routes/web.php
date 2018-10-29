@@ -52,3 +52,39 @@ Route::post('report/update/{id}', 'ReportController@update')->name('report_updat
 Route::get('search', function () { return view('search/search'); })->name('search');
 
 
+
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/', 'admin\HomeController@index');
+    Route::get('login', 'admin\LoginController@index');
+    Route::post('login', 'admin\LoginController@checkLogin');
+    Route::get('logout', 'admin\LoginController@logout');
+
+    Route::get('users', 'admin\UserController@index');
+    Route::get('/user/delete/{id}','admin\UserController@destroy');
+    Route::get('/user/status/{id}','admin\UserController@changeStatus');
+    Route::post('/user/create','admin\UserController@store');
+    Route::get('addUser', 'admin\UserController@create');
+
+    Route::get('posts', 'admin\PostController@index');
+    Route::get('/post/delete/{id}','admin\PostController@destroy');
+    Route::get('/post/status/{id}/{status}','admin\PostController@changeStatus');
+
+    Route::get('events', 'admin\EventController@index');
+    Route::get('addEvent', 'admin\EventController@create');
+    Route::post('/event/create','admin\EventController@store');
+    Route::get('/event/edit/{id}','admin\EventController@edit');
+    Route::put('/event/update/{id}','admin\EventController@update');
+    Route::get('/event/delete/{id}','admin\EventController@destroy');
+
+    Route::get('announcements', 'admin\AnnouncementsController@index');
+    Route::get('/announcement/delete/{id}','admin\AnnouncementsController@destroy');
+    Route::get('addAnnouncement', 'admin\AnnouncementsController@create');
+    Route::post('/announcement/create','admin\AnnouncementsController@store');
+    Route::get('/announcement/edit/{id}','admin\AnnouncementsController@edit');
+    Route::put('/announcement/update/{id}','admin\AnnouncementsController@update');
+    
+    Route::get('reports', 'admin\ReportController@index');
+    Route::get('/report/status/{id}/{status}','admin\ReportController@changeStatus');
+});

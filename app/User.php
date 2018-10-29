@@ -2,13 +2,20 @@
 
 namespace App;
 
+use App\Report;
+use App\Role;
+
+// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+
+	use Notifiable;
+
+    protected $table ="users";
 
     const MALE = 1;
     const FEMALE = 0;
@@ -16,8 +23,6 @@ class User extends Authenticatable
 
     const ACTIVE = 1;
     const DEACTIVATED = 0;
-
-    protected $table ="users";
 
     /**
      * The attributes that are mass assignable.
@@ -104,5 +109,4 @@ class User extends Authenticatable
     public function comments() {
         return $this->hasMany('App\Comment');
     }
-
 }
