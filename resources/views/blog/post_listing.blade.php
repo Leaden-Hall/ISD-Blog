@@ -6,6 +6,22 @@
         Your Posts
     </h3>
 
+    @if(Session::has('post_success'))
+        <div class="pt-2" style="margin-top:50px;">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('post_success')}}
+            </div>
+        </div>
+    @endif
+
+    @if(Session::has('post_update'))
+        <div class="pt-2" style="margin-top:50px;">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('post_update')}}
+            </div>
+        </div>
+    @endif
+
     @foreach($posts as $post)
         <div class="blog-post">
             <h2 class="blog-post-title">
@@ -32,9 +48,9 @@
 
 @section("aside-action-top")
     <div class="p-3">
-        <button type="button" class="btn btn-success btn-lg btn-block">
+        <a href="{{ route('post_create') }}" class="btn btn-success btn-lg btn-block">
             Add new post
-        </button>
+        </a>
     </div>
 @endsection
 

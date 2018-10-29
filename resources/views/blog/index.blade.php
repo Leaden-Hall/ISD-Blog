@@ -79,8 +79,8 @@
 
 @section("aside-action-top")
     <div class="p-3">
-        <button type="button" class="btn btn-success btn-lg btn-block">
+        <a href="{{ route('post_create') }}" class="btn btn-success btn-lg btn-block">
             Add new post
-        </button>
+        </a>
     </div>
 @endsection

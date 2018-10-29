@@ -3,100 +3,100 @@
 @section("content")
 <section>
     <h2 class="pb-2 mb-2 font-italic border-bottom">
-        Add a new report
+        New Report of Violation
     </h2>
 
-    <div class="error-message mt-5">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-danger">You have to specify the reason for this report</li>
-        </ul>
+    <div class="mt-4">
+        @include('layouts.errors')
     </div>
 
-    <div class="mt-5">
-        <h3>Report of user violation</h3>
-        <form class="bg-light p-3">
-            <div class="form-group row">
-                <label for="report-username" class="col-sm-2 col-form-label"><b>Username</b></label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="report-username" value="Username">
+
+    @if(!empty($user))
+        <div class="mt-5">
+            <h3>Report of user violation</h3>
+            <form class="bg-light p-3" method="POST" action="{{ route('report_save', 'user') }}">
+                @csrf
+                <div class="form-group row">
+                    <label for="report-username" class="col-sm-2 col-form-label"><b>Username</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control-plaintext" id="report-username" value="{{ $user->username }}" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="report-content" class="col-sm-2 col-form-label"><b>Reason</b></label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" id="report-content" rows="5"></textarea>
+                <div class="form-group row">
+                    <label for="report-content" class="col-sm-2 col-form-label"><b>Reason</b></label>
+                    <div class="col-sm-10">
+                        <textarea name="reason" class="form-control" id="report-content" rows="5" required></textarea>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group text-right">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-        </form>
-    </div>
+                <input type="hidden" name="reporter_id" value="{{ Auth::user()->id }}">
 
-    <div class="mt-5">
-        <h3>Report of blog post violation</h3>
-        <form class="bg-light p-3">
-            <div class="form-group row">
-                <label for="report-post-title" class="col-sm-2 col-form-label"><b>Post Title</b></label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="report-post-title" value="Post title">
+                <input type="hidden" name="reported_users_id" value="{{ $user->id }}">
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="report-post-author" class="col-sm-2 col-form-label"><b>Author</b></label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="report-post-author" value="Post author username">
+            </form>
+        </div>
+    @else
+        <div class="mt-5">
+            <h3>Report of blog post violation</h3>
+            <form class="bg-light p-3" method="POST" action="{{ route('report_save', 'post') }}">
+                @csrf
+                <div class="form-group row">
+                    <label for="report-post-title" class="col-sm-2 col-form-label"><b>Post Title</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control-plaintext" id="report-post-title" value="{{ $post->title }}" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="report-content" class="col-sm-2 col-form-label"><b>Reason</b></label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" id="report-content" rows="5"></textarea>
+                <div class="form-group row">
+                    <label for="report-post-author" class="col-sm-2 col-form-label"><b>Author</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control-plaintext" id="report-post-author" value="{{ $post->user->username }}" readonly>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group text-right">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-        </form>
-    </div>
+                <div class="form-group row">
+                    <label for="report-content" class="col-sm-2 col-form-label"><b>Reason</b></label>
+                    <div class="col-sm-10">
+                        <textarea name="reason" class="form-control" id="report-content" rows="5" required></textarea>
+                    </div>
+                </div>
+
+                <input type="hidden" name="reporter_id" value="{{ Auth::user()->id }}">
+
+                <input type="hidden" name="reported_posts_id" value="{{ $post->id }}">
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    @endif
+
 </section>
 @endsection
 
 @section("aside-event")
     <div class="p-2 mb-3 bg-dark rounded text-white">
         <h3 class="font-italic">
-            <a href="{{ route('event') }}" class="text-white">Big Events</a>
+            <a href="{{ route('event', $recentEvents->id) }}" class="text-white">{{ $recentEvents->title }}</a>
         </h3>
-        <p class="text-justify">Big events summary for preview text. This is a wider card with supporting text below as
-            a natural lead-in to additional content</p>
+        <p class="text-justify">{{ $recentEvents->summary }}</p>
     </div>
 @endsection
 
 @section("aside-announcement")
     <div class="p-3 mb-3 bg-light rounded">
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
-
-        <div class="mb-4">
-            <h4 class="font-italic">
-                <a class="text-dark" href="{{ route('announcement') }}">Announcements title</a>
-            </h4>
-            <div class="mb-1 text-muted">Nov 11</div>
-            <p class="card-text mb-auto">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
+        @foreach($recentAnnouncements as $recentAnnouncement)
+            <div class="mb-4">
+                <h4 class="font-italic">
+                    <a class="text-dark" href="{{ route('announcement', $recentAnnouncement->id) }}">{{ $recentAnnouncement->title }}</a>
+                </h4>
+                <div class="mb-1 text-muted">{{ $recentAnnouncement->created_at->format('F jS') }}</div>
+            </div>
+        @endforeach
     </div>
 @endsection

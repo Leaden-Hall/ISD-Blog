@@ -76,7 +76,7 @@
                     <a class="nav-link" href="{{ route('announcements') }}">Announcements</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('reports', Auth::user()->id) }}">Reports</a>
+                    <a class="nav-link" href="{{ route('reports', ["all", Auth::user()->id]) }}">Reports</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">

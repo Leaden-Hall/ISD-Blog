@@ -21,9 +21,9 @@
 <body class="text-center">
 
     @if(Session::has('authFail'))
-    <div class="alert alert-danger signin-error">
-        {{Session::get('authFail')}}
-    </div>
+        <div class="alert alert-danger signin-error">
+            {{Session::get('authFail')}}
+        </div>
     @endif
 
     @include('layouts.errors')

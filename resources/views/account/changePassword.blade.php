@@ -6,19 +6,7 @@
         Change Password
     </h2>
 
-    <div class="error-message">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-danger">Old Passowrd field is required</li>
-            <li class="list-group-item list-group-item-danger">New Password is required</li>
-            <li class="list-group-item list-group-item-danger">Confirm New Password field is required</li>
-            <li class="list-group-item list-group-item-danger">Old Password is not correct</li>
-            <li class="list-group-item list-group-item-danger">Passowrd confirmation does not matach</li>
-        </ul>
-    </div>
-
-    <div class="alert alert-success p-3 mt-2">
-        Your account password has been updated successfully.
-    </div>
+    @include('layouts.errors')
 
     <div class="mt-5">
         <form class="p-3">
@@ -50,4 +38,26 @@
         </form>
     </div>
 </section>
+@endsection
+
+@section("aside-event")
+    <div class="p-2 mb-3 bg-dark rounded text-white">
+        <h3 class="font-italic">
+            <a href="{{ route('event', $recentEvents->id) }}" class="text-white">{{ $recentEvents->title }}</a>
+        </h3>
+        <p class="text-justify">{{ $recentEvents->summary }}</p>
+    </div>
+@endsection
+
+@section("aside-announcement")
+    <div class="p-3 mb-3 bg-light rounded">
+        @foreach($recentAnnouncements as $recentAnnouncement)
+            <div class="mb-4">
+                <h4 class="font-italic">
+                    <a class="text-dark" href="{{ route('announcement', $recentAnnouncement->id) }}">{{ $recentAnnouncement->title }}</a>
+                </h4>
+                <div class="mb-1 text-muted">{{ $recentAnnouncement->created_at->format('F jS') }}</div>
+            </div>
+        @endforeach
+    </div>
 @endsection

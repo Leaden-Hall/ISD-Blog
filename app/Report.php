@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    const CANCELED = 0;
+
+    const PENDING = 1;
+
+    const APPROVED = 2;
+
     protected $table = "reports";
 
     protected $fillable = [
@@ -15,4 +21,28 @@ class Report extends Model
         'content',
         'report_status'
     ];
+
+    public function isCanceled() {
+        if($this->report_status == self::CANCELED) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isPending() {
+        if($this->report_status == self::PENDING) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isApproved() {
+        if($this->report_status == self::APPROVED) {
+            return true;
+        }
+
+        return false;
+    }
 }

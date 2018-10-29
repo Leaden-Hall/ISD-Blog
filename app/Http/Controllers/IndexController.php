@@ -11,6 +11,7 @@ class IndexController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('logout');
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
 
     public function login(Request $request) {

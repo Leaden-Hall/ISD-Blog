@@ -7,18 +7,42 @@
     </h2>
 
     <div class="btn-group float-right mb-5" role="group">
-        <button type="button" class="btn btn-outline-secondary">All</button>
-        <button type="button" class="btn btn-outline-primary">Pending</button>
-        <button type="button" class="btn btn-outline-success">Approved</button>
-        <button type="button" class="btn btn-outline-danger">Canceled</button>
+        <a href="{{ route('reports', ["all", Auth::user()->id]) }}"
+           class="btn btn-outline-secondary @if($status == 'all') active @endif ">All</a>
+
+        <a href="{{ route('reports', ["pending", Auth::user()->id]) }}"
+           class="btn btn-outline-primary @if($status == 'pending') active @endif ">Pending</a>
+
+        <a href="{{ route('reports', ["approved", Auth::user()->id]) }}"
+           class="btn btn-outline-success @if($status == 'approved') active @endif ">Approved</a>
+
+        <a href="{{ route('reports', ["canceled", Auth::user()->id]) }}"
+           class="btn btn-outline-danger @if($status == 'canceled') active @endif ">Canceled</a>
     </div>
 
-
-    <div class="pt-2" style="margin-top:75px;">
-        <div class="alert alert-success" role="alert">
-            Report is canceled successfully.
+    @if(Session::has('report_success'))
+        <div class="pt-2" style="margin-top:75px;">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('report_success')}}
+            </div>
         </div>
-    </div>
+    @endif
+
+    @if(Session::has('report_cancel'))
+        <div class="pt-2" style="margin-top:75px;">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('report_cancel')}}
+            </div>
+        </div>
+    @endif
+
+    @if(Session::has('report_update'))
+        <div class="pt-2" style="margin-top:75px;">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('report_update')}}
+            </div>
+        </div>
+    @endif
 
     <table class="table table-hover">
         <thead>
@@ -37,9 +61,19 @@
             <td class="text-center">{{ $report->reported_posts_id }}</td>
             <td class="text-center">{{ $report->reported_users_id }}</td>
             <td class="text-center">
-                <span class="badge badge-primary">Pending</span>
-                <span class="badge badge-success">Approved</span>
-                <span class="badge badge-danger">Canceled</span>
+                @if($report->isPending())
+                    <span class="badge badge-primary">Pending</span>
+                @endif
+
+                @if($report->isApproved())
+                        <span class="badge badge-success">Approved</span>
+                @endif
+
+                @if($report->isCanceled())
+                        <span class="badge badge-danger">Canceled</span>
+                @endif
+
+
             </td>
             <td class="text-right">
                 <a href="{{ route('report', $report->id) }}" class="btn btn-outline-warning">View</a>
