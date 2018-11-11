@@ -8,33 +8,39 @@
 
     @include('layouts.errors')
 
+    @if(Session::has("password_update_fail"))
+        <div class="alert alert-danger p-3 mt-2">
+            {{Session::get("password_update_fail")}}
+        </div>
+    @endif
+
     <div class="mt-5">
-        <form class="p-3">
+        <form class="p-3" method="POST" action="{{ route('change_password', Auth::getUser()->id) }}">
+            @csrf
             <div class="form-group row">
                 <label for="oldPass" class="col-sm-4 col-form-label">Old Password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="oldPass" placeholder="Old Password">
+                    <input type="password" name="old_password" class="form-control" id="oldPass" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="newPass" class="col-sm-4 col-form-label">New Password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="newPass" placeholder="New Password">
+                    <input type="password" name="password" class="form-control" id="newPass" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="confirmPass" class="col-sm-4 col-form-label">Confirm New Password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="confirmPass" placeholder="Confirm Password">
+                    <input type="password" name="password_confirmation" class="form-control" id="confirmPass" required>
                 </div>
             </div>
 
             <div class="form-group text-right mt-5">
                 <button type="submit" class="btn btn-primary">Change</button>
             </div>
-
         </form>
     </div>
 </section>

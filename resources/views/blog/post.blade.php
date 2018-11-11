@@ -61,7 +61,12 @@
                         <div class="card-body" id="comment{{ $comment->id }}">
                             <h5 class="card-title">{{ $comment->user->username }}</h5>
                             <h6 class="card-subtitle mb-2 text-muted">{{ $comment->created_at->diffForHumans() }}</h6>
-                            <p class="card-text">{{ $comment->content }}</p>
+                            <p class="card-text">{{ $comment->content }} <br>
+                                @if($comment->updated_at)
+                                    <span class="text-muted">Last edited: {{ $comment->updated_at->diffForHumans() }}</span>
+                                @endif
+
+                            </p>
 
                             @if(!empty($comment->childComment($comment->id)))
                                 @foreach($comment->childComment($comment->id) as $childComment)
@@ -141,7 +146,7 @@
                 </div>
 
                 <input type="hidden" name="post_id" value="{{ $editComment->posts_id }}">
-                <input type="hidden" name="user_id" value="{{ $editComment->users_id }}">
+                <input type="hidden" name="comment_id" value="{{ $editComment->id }}">
 
                 <div class="form-group float-right">
                     <button type="submit" class="btn btn-primary"><b>Update</b></button>

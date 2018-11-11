@@ -6,16 +6,17 @@
             Your Account
         </h2>
 
-
-        <div class="alert alert-success p-3 mt-2">
-            Your account password has been updated successfully.
-        </div>
-
+        @if(Session::has("password_update"))
+            <div class="alert alert-success p-3 mt-2">
+                {{Session::get("password_update")}}
+            </div>
+        @endif
 
         <div class="mt-5">
             <div class="row">
                 <div class="col-6">
                     <form>
+                        @csrf
                         <div class="form-group text-center">
                             <img src="{{ $account->avatar }}" width="200px" height="200px">
                         </div>
@@ -82,34 +83,34 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="account-active-post" class="col-sm-5 col-form-label"><b>Active Posts</b></label>
-                            <div class="col-sm-7">
-                                <input type="number" readonly class="form-control-plaintext" id="account-active-post" value="10">
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="account-active-post" class="col-sm-5 col-form-label"><b>Active Posts</b></label>--}}
+                            {{--<div class="col-sm-7">--}}
+                                {{--<input type="number" readonly class="form-control-plaintext" id="account-active-post" value="10">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                        <div class="form-group row">
-                            <label for="account-pending-post" class="col-sm-5 col-form-label"><b>Pending Posts</b></label>
-                            <div class="col-sm-7">
-                                <input type="number" readonly class="form-control-plaintext"
-                                       id="account-pending-post" value="10">
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="account-pending-post" class="col-sm-5 col-form-label"><b>Pending Posts</b></label>--}}
+                            {{--<div class="col-sm-7">--}}
+                                {{--<input type="number" readonly class="form-control-plaintext"--}}
+                                       {{--id="account-pending-post" value="10">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                        <div class="form-group row">
-                            <label for="account-cancel-post" class="col-sm-5 col-form-label"><b>Canceled Posts</b></label>
-                            <div class="col-sm-7">
-                                <input type="number" readonly class="form-control-plaintext" id="account-cancel-post" value="10">
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="account-cancel-post" class="col-sm-5 col-form-label"><b>Canceled Posts</b></label>--}}
+                            {{--<div class="col-sm-7">--}}
+                                {{--<input type="number" readonly class="form-control-plaintext" id="account-cancel-post" value="10">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
-                        <div class="form-group row">
-                            <label for="account-violation" class="col-sm-5 col-form-label"><b>Violation</b></label>
-                            <div class="col-sm-7">
-                                <input type="number" readonly class="form-control-plaintext" id="account-violation" value="20">
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label for="account-violation" class="col-sm-5 col-form-label"><b>Violation</b></label>--}}
+                            {{--<div class="col-sm-7">--}}
+                                {{--<input type="number" readonly class="form-control-plaintext" id="account-violation" value="20">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
 
                         <div class="form-group row">
                             <label for="account-create" class="col-sm-5 col-form-label"><b>Created At</b></label>
@@ -142,6 +143,16 @@
     </section>
 @endsection
 
+@section("aside-action-top")
+    @if(Auth::user()->id != $account->id)
+        <div class="p-3">
+            <a href="{{ route('report_add', ['user', $account->id]) }}" class="btn btn-warning btn-lg btn-block">
+                Report This User
+            </a>
+        </div>
+    @endif
+@endsection
+
 @section("aside-event")
     <div class="p-2 mb-3 bg-dark rounded text-white">
         <h3 class="font-italic">
@@ -166,7 +177,7 @@
 
 @section("aside-action-bottom")
     <div class="p-3">
-        <a href="#" class="btn btn-danger btn-lg btn-block"
+        <a href="{{ route('account_deactivate', $account->id) }}" class="btn btn-danger btn-lg btn-block"
            onclick="return confirm('Are you certain that you want to deactivate your account?');">
             Deactivate Account
         </a>

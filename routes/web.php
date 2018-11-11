@@ -17,12 +17,15 @@ Route::post('login', 'IndexController@login')->name('login');
 Route::post('logout', 'IndexController@logout')->name('logout');
 
 Route::get('home', 'PostController@index')->name('home');
+Route::get('home/archive/{timestamp}', 'PostController@archive')->name('archive');
+Route::post('home/search', 'PostController@search')->name('search');
 
-Route::get('account/edit/{id}', function () { return view('account/account_edit'); })->name('account_edit');
+Route::get('account/edit/{id}', 'AccountController@edit')->name('account_edit');
+Route::post('account/update', 'AccountController@update')->name('account_update');
+Route::get('account/deactivate/{id}', 'AccountController@deactivate')->name('account_deactivate');
 Route::get('account/password/{id}', 'AccountController@password')->name('password');
-Route::put('account/password/{id}', 'AccountController@changePassword')->name('change_password');
+Route::post('account/password/{id}', 'AccountController@changePassword')->name('change_password');
 Route::get('account/{id}', 'AccountController@show')->name('account');
-
 
 Route::get('posts/{user_id}', 'PostController@postList')->name('posts');
 Route::get('post/create', 'PostController@create')->name('post_create');
@@ -49,13 +52,10 @@ Route::post('report/add/{type}', 'ReportController@save')->name('report_save');
 Route::get('report/cancel/{id}', 'ReportController@cancel')->name('report_cancel');
 Route::post('report/update/{id}', 'ReportController@update')->name('report_update');
 
-Route::get('search', function () { return view('search/search'); })->name('search');
-
 
 
 
 Route::prefix('admin')->group(function () {
-
     Route::get('/', 'admin\HomeController@index');
     Route::get('login', 'admin\LoginController@index');
     Route::post('login', 'admin\LoginController@checkLogin');

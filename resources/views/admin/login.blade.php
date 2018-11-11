@@ -4,7 +4,7 @@
    <head>
       <meta charset="utf-8" />
       <link rel="apple-touch-icon" sizes="76x76" href="{{asset('/storage/assets/admin/img/apple-icon.png')}}">
-      <link rel="icon" type="image/png" href="{{asset('/storage/assets/admin/img/favicon.png')}}">
+      <link rel="icon" type="image/png" href="{{asset('/storage/assets/admin/img/favicon.ico')}}">
       <title>VIETPOINTER BLOGS</title>
       <!--     Fonts and icons     -->
       {{--     

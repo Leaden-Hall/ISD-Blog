@@ -6,43 +6,49 @@
         Your Posts
     </h3>
 
-    @if(Session::has('post_success'))
-        <div class="pt-2" style="margin-top:50px;">
-            <div class="alert alert-success" role="alert">
-                {{Session::get('post_success')}}
-            </div>
-        </div>
+    @if(!empty($posts))
+        @if(count($posts) <= 0)
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                Today's Posts
+            </h3>
+
+            <div class="blog-post">
+                <h4 class="text-center">No post found</h4>
+            </div><!-- /.blog-post -->
+        @else
+            @if(Session::has('post_success'))
+                <div class="pt-2" style="margin-top:50px;">
+                    <div class="alert alert-success" role="alert">
+                        {{Session::get('post_success')}}
+                    </div>
+                </div>
+            @endif
+
+            @if(Session::has('post_update'))
+                <div class="pt-2" style="margin-top:50px;">
+                    <div class="alert alert-success" role="alert">
+                        {{Session::get('post_update')}}
+                    </div>
+                </div>
+            @endif
+
+            @foreach($posts as $post)
+
+                <div class="blog-post">
+                    <h2 class="blog-post-title">
+                        <a href="{{ route('post', $post->id) }}" class="text-dark">{{ $post->title }}</a>
+                    </h2>
+                    <p class="blog-post-meta">{{$post->created_at->format('F jS, Y')}} by <a href="{{ route('account', $post->user->id) }}">{{ $post->user->username }}</a></p>
+
+                    <p>{{ $post->summary }}</p>
+                </div><!-- /.blog-post -->
+            @endforeach
+
+            {{ $posts->links() }}
+            <div class="clear-fix"></div>
+        @endif
     @endif
 
-    @if(Session::has('post_update'))
-        <div class="pt-2" style="margin-top:50px;">
-            <div class="alert alert-success" role="alert">
-                {{Session::get('post_update')}}
-            </div>
-        </div>
-    @endif
-
-    @foreach($posts as $post)
-        <div class="blog-post">
-            <h2 class="blog-post-title">
-                <a href="{{ route('post', $post->id) }}" class="text-dark">{{ $post->title }}</a>
-            </h2>
-            <p class="blog-post-meta">{{$post->created_at->format('F jS, Y')}} by <a href="{{ route('account', $post->user->id) }}">{{ $post->user->username }}</a></p>
-
-            <p>{{ $post->summary }}</p>
-        </div><!-- /.blog-post -->
-    @endforeach
-
-    <nav class="float-right mt-5">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav>
-    <div class="clear-fix"></div>
 </section>
 @endsection
 

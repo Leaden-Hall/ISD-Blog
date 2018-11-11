@@ -36,7 +36,7 @@
 @section("content")
 <section>
     <h2 class="pb-3 mb-5 font-italic border-bottom">
-        Announcements
+        Older Announcements
     </h2>
 
     @foreach($announcements as $announcement)
@@ -52,15 +52,9 @@
     </div>
 
     @endforeach
-    <nav class="float-right mt-5">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav>
+
+    {{ $announcements->links() }}
+
 </section>
 @endsection
 

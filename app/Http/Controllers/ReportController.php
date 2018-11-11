@@ -23,18 +23,18 @@ class ReportController extends Controller
 
         switch ($status) {
             case "pending":
-                $reports = Report::where('reporter_id', $user_id)->where('report_status', 1)->get();
+                $reports = Report::where('reporter_id', $user_id)->where('report_status', Report::PENDING)->paginate(4);
                 break;
 
             case "approved":
-                $reports = Report::where('reporter_id', $user_id)->where('report_status', 2)->get();
+                $reports = Report::where('reporter_id', $user_id)->where('report_status', Report::APPROVED)->paginate(4);
                 break;
             case "canceled":
-                $reports = Report::where('reporter_id', $user_id)->where('report_status', 0)->get();
+                $reports = Report::where('reporter_id', $user_id)->where('report_status', Report::CANCELED)->paginate(4);
                 break;
 
             default:
-                $reports = Report::where('reporter_id', $user_id)->get();
+                $reports = Report::where('reporter_id', $user_id)->paginate(4);
         }
 
         return view('report/index', compact(['recentAnnouncements', 'recentEvents', 'reports', 'status']));
@@ -82,7 +82,7 @@ class ReportController extends Controller
 
             return view('report/report_add', compact(['user', 'recentAnnouncements', 'recentEvents']));
         }else {
-            route('404');
+            return redirect()->route('404');
         }
     }
 
@@ -102,7 +102,7 @@ class ReportController extends Controller
             $newReport->reporter_id = $reporter_id;
             $newReport->reported_posts_id = $reported_posts_id;
             $newReport->content = $reason;
-            $newReport->report_status = 1;
+            $newReport->report_status = Report::PENDING;
             $newReport->setUpdatedAt(null);
 
             $newReport->save();
@@ -119,7 +119,7 @@ class ReportController extends Controller
             $newReport->reporter_id = $reporter_id;
             $newReport->reported_users_id = $reported_users_id;
             $newReport->content = $reason;
-            $newReport->report_status = 1;
+            $newReport->report_status = Report::PENDING;
             $newReport->setUpdatedAt(null);
 
             $newReport->save();
@@ -147,7 +147,7 @@ class ReportController extends Controller
     public function cancel($id) {
         $cancelReport = Report::find($id);
 
-        $cancelReport->report_status = 0;
+        $cancelReport->report_status = Report::CANCELED;
 
         $cancelReport->save();
 

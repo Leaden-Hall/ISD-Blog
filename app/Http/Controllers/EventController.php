@@ -13,7 +13,7 @@ class EventController extends Controller
     }
 
     public function index() {
-        $events = Event::orderBy('created_at', 'DESC')->skip(1)->take(10)->get();
+        $events = Event::orderBy('created_at', 'DESC')->skip(1)->paginate(4);
         $recentEvents = $this->bigEvents();
 
         $Announcements = new AnnouncementController();

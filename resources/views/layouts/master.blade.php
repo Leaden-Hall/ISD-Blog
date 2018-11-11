@@ -79,8 +79,9 @@
                     <a class="nav-link" href="{{ route('reports', ["all", Auth::user()->id]) }}">Reports</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" method="POST" action="{{ route('search') }}">
+                @csrf
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="key">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -112,18 +113,18 @@
             <div class="p-3">
                 <h4 class="font-italic">Post Archives</h4>
                 <ol class="list-unstyled mb-0">
-                    <li><a href="#">January 2018</a></li>
-                    <li><a href="#">February 2018</a></li>
-                    <li><a href="#">March 2018</a></li>
-                    <li><a href="#">April 2018</a></li>
-                    <li><a href="#">May 2018</a></li>
-                    <li><a href="#">June 2018</a></li>
-                    <li><a href="#">July 2018</a></li>
-                    <li><a href="#">August 2018</a></li>
-                    <li><a href="#">September 2018</a></li>
-                    <li><a href="#">October 2018</a></li>
-                    <li><a href="#">November 2018</a></li>
-                    <li><a href="#">December 2018</a></li>
+                    <li><a href="{{ route('archive', 'January') }}">January 2018</a></li>
+                    <li><a href="{{ route('archive', 'February') }}">February 2018</a></li>
+                    <li><a href="{{ route('archive', 'March') }}">March 2018</a></li>
+                    <li><a href="{{ route('archive', 'April') }}">April 2018</a></li>
+                    <li><a href="{{ route('archive', 'May') }}">May 2018</a></li>
+                    <li><a href="{{ route('archive', 'June') }}">June 2018</a></li>
+                    <li><a href="{{ route('archive', 'July') }}">July 2018</a></li>
+                    <li><a href="{{ route('archive', 'August') }}">August 2018</a></li>
+                    <li><a href="{{ route('archive', 'September') }}">September 2018</a></li>
+                    <li><a href="{{ route('archive', 'October') }}">October 2018</a></li>
+                    <li><a href="{{ route('archive', 'November') }}">November 2018</a></li>
+                    <li><a href="{{ route('archive', 'December') }}">December 2018</a></li>
                 </ol>
             </div>
 

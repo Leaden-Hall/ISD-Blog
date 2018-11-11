@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
 
     public function index() {
         $recentAnnouncements = $this->bigAnnouncements();
-        $announcements = Announcement::orderBy('created_at', 'DESC')->skip(2)->take(10)->get();
+        $announcements = Announcement::orderBy('created_at', 'DESC')->skip(2)->paginate(4);
 
         $Events = new EventController();
         $recentEvents = $Events->bigEvents();

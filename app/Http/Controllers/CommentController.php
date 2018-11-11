@@ -78,9 +78,16 @@ class CommentController extends Controller
             'comment_content' => 'required|string'
         ]);
 
-        $user_id = $request->user_id;
         $post_id = $request->post_id;
-        $content = $request->comment_content;
+        $updateContent = $request->comment_content;
+        $updateCommentId = $request->comment_id;
+
+        $updateComment = Comment::find($updateCommentId);
+        $updateComment->content = $updateContent;
+        $updateComment->updated_at = Carbon::now();
+        $updateComment->save();
+
+        return redirect("post/$post_id/#comment$updateCommentId");
     }
 
 }

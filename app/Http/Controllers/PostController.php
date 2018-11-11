@@ -23,14 +23,14 @@ class PostController extends Controller
         $Events = new EventController();
         $recentEvents = $Events->bigEvents();
 
-        $posts = Post::where('posts_status', 1)->orderBy('created_at', 'DESC')->get();
+        $posts = Post::where('posts_status', Post::ACTIVE)->orderBy('created_at', 'DESC')->paginate(4);
 
         return view('blog/index', compact(['recentAnnouncements', 'recentEvents', 'posts']));
     }
 
 
     public function postList($user_id) {
-        $posts = Post::where('users_id', $user_id)->orderBy('created_at', 'DESC')->get();
+        $posts = Post::where('users_id', $user_id)->orderBy('created_at', 'DESC')->paginate(5);
 
         $Events = new EventController();
         $recentEvents = $Events->bigEvents();
@@ -69,7 +69,7 @@ class PostController extends Controller
         $newPost->title = $title;
         $newPost->summary = $summary;
         $newPost->content = $content;
-        $newPost->posts_status = 2;
+        $newPost->posts_status = Post::PENDING;
         $newPost->users_id = $publisher_id;
         $newPost->title = $title;
         $newPost->setUpdatedAt(null);
@@ -126,7 +126,7 @@ class PostController extends Controller
         $updatePost->title = $title;
         $updatePost->summary = $summary;
         $updatePost->content = $content;
-        $updatePost->posts_status = 2;
+        $updatePost->posts_status = Post::PENDING;
         $updatePost->users_id = $publisher_id;
         $updatePost->title = $title;
         $updatePost->setUpdatedAt(Carbon::now());
@@ -135,6 +135,124 @@ class PostController extends Controller
 
         session()->flash('post_update', 'You have update the post successfully');
         return redirect("posts/$publisher_id");
+    }
+
+    public function archive($timestamp) {
+        $archivePosts = Post::where('created_at', '>=', $this->archiveStartTime($timestamp))
+                            ->where('created_at', '<=', $this->archiveEndTime($timestamp))
+                            ->orderBy('created_at', 'DESC')->get();
+
+        $Announcements = new AnnouncementController();
+        $recentAnnouncements = $Announcements->bigAnnouncements();
+
+        $Events = new EventController();
+        $recentEvents = $Events->bigEvents();
+
+        return view('blog/index', compact(['recentAnnouncements', 'recentEvents', 'archivePosts', 'timestamp']));
+    }
+
+    public function search(Request $request) {
+        $this->validate($request, [
+            'key' => 'required|string'
+        ]);
+
+        $key = $request->key;
+
+        $searchPosts = Post::where('title', 'LIKE', '%'.$key.'%')->get();
+
+        $Announcements = new AnnouncementController();
+        $recentAnnouncements = $Announcements->bigAnnouncements();
+
+        $Events = new EventController();
+        $recentEvents = $Events->bigEvents();
+
+        return view('search/search', compact(['recentAnnouncements', 'recentEvents', 'searchPosts', 'key']));
+    }
+
+    public function archiveStartTime($timestamp) {
+        switch ($timestamp) {
+            case "January":
+                return "2018-01-01 00:00:00";
+                break;
+            case "February":
+                return "2018-02-01 00:00:00";
+                break;
+            case "March":
+                return "2018-03-01 00:00:00";
+                break;
+            case "April":
+                return "2018-04-01 00:00:00";
+                break;
+            case "May":
+                return "2018-05-01 00:00:00";
+                break;
+            case "June":
+                return "2018-06-01 00:00:00";
+                break;
+            case "July":
+                return "2018-07-01 00:00:00";
+                break;
+            case "August":
+                return "2018-08-01 00:00:00";
+                break;
+            case "September":
+                return "2018-09-01 00:00:00";
+                break;
+            case "October":
+                return "2018-10-01 00:00:00";
+                break;
+            case "November":
+                return "2018-11-01 00:00:00";
+                break;
+            case "December":
+                return "2018-12-01 00:00:00";
+                break;
+            default:
+                return null;
+        }
+    }
+
+    public function archiveEndTime($timestamp) {
+        switch ($timestamp) {
+            case "January":
+                return "2018-01-31 23:59:59";
+                break;
+            case "February":
+                return "2018-02-28 23:59:59";
+                break;
+            case "March":
+                return "2018-03-31 23:59:59";
+                break;
+            case "April":
+                return "2018-04-30 23:59:59";
+                break;
+            case "May":
+                return "2018-05-31 23:59:59";
+                break;
+            case "June":
+                return "2018-06-30 23:59:59";
+                break;
+            case "July":
+                return "2018-07-31 23:59:59";
+                break;
+            case "August":
+                return "2018-08-31 23:59:59";
+                break;
+            case "September":
+                return "2018-09-30 23:59:59";
+                break;
+            case "October":
+                return "2018-10-31 23:59:59";
+                break;
+            case "November":
+                return "2018-11-30 23:59:59";
+                break;
+            case "December":
+                return "2018-12-31 23:59:59";
+                break;
+            default:
+                return null;
+        }
     }
 
 }

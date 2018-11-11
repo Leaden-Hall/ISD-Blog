@@ -49,31 +49,75 @@
 
 @section("content")
 <section>
-    <h3 class="pb-3 mb-4 font-italic border-bottom">
-        Today's Posts
-    </h3>
+    @if(!empty($posts))
+        @if(count($posts) <= 0)
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                Today's Posts
+            </h3>
 
-    @foreach($posts as $post)
-    <div class="blog-post">
-        <h2 class="blog-post-title">
-            <a href="{{ route('post', $post->id ) }}" class="text-dark">{{ $post->title }}</a>
-        </h2>
-        <p class="blog-post-meta">{{ $post->created_at->format('F jS, Y') }} by <a href="{{ route('account', $post->user->id) }}">{{ $post->user->username }}</a></p>
+            <div class="blog-post">
+                <h4 class="text-center">No post found</h4>
+            </div><!-- /.blog-post -->
+        @else
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                Today's Posts
+            </h3>
 
-        <p>{{ $post->summary }}</p>
-    </div><!-- /.blog-post -->
-    @endforeach
+            @foreach($posts as $post)
+                <div class="blog-post">
+                    <h2 class="blog-post-title">
+                        <a href="{{ route('post', $post->id ) }}" class="text-dark">{{ $post->title }}</a>
+                    </h2>
+                    <p class="blog-post-meta">{{ $post->created_at->format('F jS, Y') }} by <a href="{{ route('account', $post->user->id) }}">{{ $post->user->username }}</a></p>
 
-    <nav class="float-right mt-5">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav>
-    <div class="clear-fix"></div>
+                    <p>{{ $post->summary }}</p>
+                </div><!-- /.blog-post -->
+            @endforeach
+
+            {{ $posts->links() }}
+
+        @endif
+
+    @endif
+
+    @if(!empty($archivePosts) && !empty($timestamp))
+        @if(count($archivePosts) <= 0)
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                {{ $timestamp }} Archive
+            </h3>
+
+            <div class="blog-post">
+                <h4 class="text-center">No post found for this archive</h4>
+            </div><!-- /.blog-post -->
+        @else
+            <h3 class="pb-3 mb-4 font-italic border-bottom">
+                {{ $timestamp }} Archive
+            </h3>
+
+            @foreach($archivePosts as $post)
+                <div class="blog-post">
+                    <h2 class="blog-post-title">
+                        <a href="{{ route('post', $post->id ) }}" class="text-dark">{{ $post->title }}</a>
+                    </h2>
+                    <p class="blog-post-meta">{{ $post->created_at->format('F jS, Y') }} by <a href="{{ route('account', $post->user->id) }}">{{ $post->user->username }}</a></p>
+
+                    <p>{{ $post->summary }}</p>
+                </div><!-- /.blog-post -->
+            @endforeach
+
+            <nav class="float-right mt-5">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        @endif
+
+    @endif
+
 </section>
 @endsection
 
