@@ -4,6 +4,12 @@
 
 <div class="row">
    <div class="col-md-12">
+      @if($count == 0)
+         <div class="alert alert-info">
+            <span><b> Notify - </b> No record exists in this table</span>
+         </div>
+      @else
+      
       <div class="card table-big-boy">
          <div class="card-header ">
             <a href="{!! url('admin/addEvent'); !!}" class="btn btn-success btn-wd">Add Event</a>
@@ -62,6 +68,7 @@
             </table>
          </div>
       </div>
+      @endif
    </div>
 </div>
 

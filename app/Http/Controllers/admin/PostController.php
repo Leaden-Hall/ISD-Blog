@@ -17,7 +17,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view('admin/posts', compact('posts'));
+        $count = $posts->count();
+        return view('admin/posts', compact('posts','count'));
     }
 
     public function changeStatus($id, $status)

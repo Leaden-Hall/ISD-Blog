@@ -16,7 +16,8 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::orderBy('created_at','desc')->paginate(10);
-        return view('admin/reports', compact('reports'));
+        $count = $reports->count();
+        return view('admin/reports', compact('reports','count'));
     }
 
      public function changeStatus($id, $status)

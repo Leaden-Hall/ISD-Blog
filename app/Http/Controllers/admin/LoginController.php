@@ -16,12 +16,12 @@ class LoginController extends Controller
     public function checkLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|min:4|max:20',
-            'password' => 'required|min:6'
+            'email' => 'required',
+            'password' => 'required'
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials) && Auth::user()->user_status == 1) {
+        if (Auth::attempt($credentials) && Auth::user()->user_status == 1 && Auth::user()->roles_id == 2) {
             return redirect()->intended('admin');
         }
 

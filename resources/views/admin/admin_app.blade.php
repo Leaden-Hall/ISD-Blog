@@ -117,12 +117,12 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end">
                <ul class="nav navbar-nav mr-auto">
-                  <form class="navbar-form navbar-left navbar-search-form" role="search">
+                  {{-- <form class="navbar-form navbar-left navbar-search-form" role="search">
                      <div class="input-group">
                         <i class="nc-icon nc-zoom-split"></i>
                         <input type="text" value="" class="form-control" placeholder="Search...">
                      </div>
-                  </form>
+                  </form> --}}
                </ul>
                <ul class="navbar-nav">
                   <a href="{!! url('admin/logout'); !!}" class="btn btn-info">Log out</a>

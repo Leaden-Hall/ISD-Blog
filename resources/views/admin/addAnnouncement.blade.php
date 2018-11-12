@@ -7,7 +7,7 @@
    {!! Form::open(array('url' => 'admin/announcement/create', 'method' => 'POST', 'id' => 'TypeValidation', 'class' => 'form-horizontal')) !!}
       <div class="card " >
          <div class="card-header ">
-            <h3 class="card-title" align="center">Notification form</h3>
+            <h3 class="card-title" align="center">Announcement form</h3>
             <br>
          </div>
          <div class="card-body ">

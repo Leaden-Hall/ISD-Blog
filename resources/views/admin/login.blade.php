@@ -72,10 +72,7 @@
                                         <div class="form-group">
                                             <label>Password</label>
                                             {{-- <input type="password" placeholder="Password" class="form-control"> --}}
-                                            {{Form::password('password', array('class' => 'form-control', 'type' => 'password', 'required' => 'true', 'placeholder' => 'Enter username...'))}}
-                                        </div>
-                                        <div class="form-group">
-                                            <a style="font-size: 13px;" href="">Forget your password?</a>
+                                            {{Form::password('password', array('class' => 'form-control', 'type' => 'password', 'required' => 'true', 'placeholder' => 'Enter password...'))}}
                                         </div>
                                     </div>
                                 </div>

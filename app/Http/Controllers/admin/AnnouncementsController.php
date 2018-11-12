@@ -16,7 +16,8 @@ class AnnouncementsController extends Controller
     public function index()
     {
         $announcements = Announcement::orderBy('created_at','desc')->paginate(10);
-        return view('admin/announcements', compact('announcements'));
+        $count = $announcements->count();
+        return view('admin/announcements', compact('announcements','count'));
     }
 
     public function create()
@@ -63,6 +64,7 @@ class AnnouncementsController extends Controller
         $announcement->content = $input["content"];
         $announcement->save();
 
+        $request->session()->flash('alert-success', 'Announcement was successful updated!');
         return redirect('admin/announcements');
     }
 

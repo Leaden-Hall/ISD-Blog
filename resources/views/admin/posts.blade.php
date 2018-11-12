@@ -4,6 +4,12 @@
 
 <div class="row">
    <div class="col-md-12">
+      @if($count == 0)
+         <div class="alert alert-info">
+            <span><b> Notify - </b> No record exists in this table</span>
+         </div>
+      @else
+      
       <div class="card table-big-boy">
          <div class="card-header ">
             <h4 class="card-title">Post Table</h4>
@@ -78,6 +84,7 @@
             </table>
          </div>
       </div>
+      @endif
    </div>
 </div>
 
