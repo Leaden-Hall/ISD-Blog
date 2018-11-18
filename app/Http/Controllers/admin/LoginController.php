@@ -21,10 +21,13 @@ class LoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials) && Auth::user()->user_status == 1 && Auth::user()->roles_id == 2) {
+        if (Auth::attempt($credentials) && Auth::user()->user_status == 1 && Auth::user()->roles_id == 1) {
             return redirect()->intended('admin');
         }
 
+        if(Auth::user()->roles_id != 1) {
+            return back()->with('error', 'You are not an administrator');
+        }
         return back()->with('error', 'Email or password is not correct!');
     }
 

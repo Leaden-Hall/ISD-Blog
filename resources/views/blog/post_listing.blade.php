@@ -32,6 +32,14 @@
                 </div>
             @endif
 
+            @if(Session::has('post_cancel'))
+                <div class="pt-2" style="margin-top:50px;">
+                    <div class="alert alert-success" role="alert">
+                        {{Session::get('post_cancel')}}
+                    </div>
+                </div>
+            @endif
+
             @foreach($posts as $post)
 
                 <div class="blog-post">

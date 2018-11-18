@@ -255,4 +255,16 @@ class PostController extends Controller
         }
     }
 
+    public function cancel($id) {
+        $cancelPost = Post::find($id);
+        $cancelPost->posts_status = Post::CANCELED;
+
+        $publisher_id = $cancelPost->users_id;
+        $cancelPost->save();
+
+        session()->flash('post_cancel', 'You have canceled the post successfully');
+        return redirect("posts/$publisher_id");
+
+    }
+
 }

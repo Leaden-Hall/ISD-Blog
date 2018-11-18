@@ -35,11 +35,11 @@
                      <td>
                         <div class="img-container">
                            @php ($image = \App\PostImage::where('posts_id', $post->id)->value('url'))
-                           <img src="{{asset('/storage/storage/images/posts/'.$image)}}" alt="...">
+                           <img src="{{asset('/storage/assets/admin/img/blog-1.jpg')}}" alt="...">
                         </div>
                      </td>
                      <td class="td-name">
-                        <a href="{!! url('admin/blogContent'); !!}">{{$post->title}}</a>
+                        <a href="{!! url("/post/$post->id"); !!}">{{$post->title}}</a>
                      </td>
                      <td>
                         {{$post->summary}}

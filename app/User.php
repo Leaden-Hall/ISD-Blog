@@ -39,6 +39,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     public function isNotified() {
         if($this->is_notified == 1) {
             return "Enable";
@@ -47,6 +48,7 @@ class User extends Authenticatable
         }
         return null;
     }
+
     public function gender() {
         if($this->gender == self::MALE) {
             return "Male";
@@ -57,6 +59,7 @@ class User extends Authenticatable
         }
         return null;
     }
+
     public function status() {
         if($this->user_status == self::ACTIVE) {
             return "Active";
@@ -65,24 +68,29 @@ class User extends Authenticatable
         }
         return null;
     }
+
     public function isActive() {
         if($this->user_status == self::ACTIVE) {
             return true;
         }
         return false;
     }
+
     public function isInactive() {
         if($this->user_status == self::DEACTIVATED) {
             return true;
         }
         return false;
     }
+
     public function posts() {
         return $this->hasMany('App\Post');
     }
+
     public function role() {
         return $this->belongsTo('App\Role', 'roles_id');
     }
+
     public function comments() {
         return $this->hasMany('App\Comment');
     }

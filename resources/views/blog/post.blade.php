@@ -23,7 +23,7 @@
             @if($post->isCanceled())
                 <div class="pt-3">
                     <div class="alert alert-danger" role="alert">
-                        This post is canceled by Administrator
+                        This post has been canceled
                     </div>
                 </div>
             @endif
@@ -232,10 +232,12 @@
 @endsection
 
 @section("aside-action-bottom")
-    <div class="p-3">
-        <a href="#" class="btn btn-danger btn-lg btn-block"
-           onclick="return confirm('Are you certain that you want to cancel this post?');">
-            Cancel This Post
-        </a>
-    </div>
+    @if($post->users_id == Auth::user()->id)
+        <div class="p-3">
+            <a href="{{ route('post_cancel', $post->id) }}" class="btn btn-danger btn-lg btn-block"
+               onclick="return confirm('Are you certain that you want to cancel this post?');">
+                Cancel This Post
+            </a>
+        </div>
+    @endif
 @endsection

@@ -36,14 +36,6 @@
         </div>
     @endif
 
-    @if(Session::has('report_update'))
-        <div class="pt-2" style="margin-top:75px;">
-            <div class="alert alert-success" role="alert">
-                {{Session::get('report_update')}}
-            </div>
-        </div>
-    @endif
-
     <table class="table table-hover">
         <thead>
         <tr>

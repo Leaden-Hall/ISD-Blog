@@ -141,7 +141,7 @@ class ReportController extends Controller
 
         $reporter_id = $updateReport->reporter_id;
         session()->flash('report_update', 'Your report has been updated successfully');
-        return redirect("reports/all/$reporter_id");
+        return redirect("report/$id");
     }
 
     public function cancel($id) {

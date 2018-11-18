@@ -9,7 +9,7 @@
 
     <link rel="icon" href="{{ asset('/storage/assets/favicon.ico') }}">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Vietpointer Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('/storage/assets/css/bootstrap.min.css') }}" rel="stylesheet">

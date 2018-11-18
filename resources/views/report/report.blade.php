@@ -6,6 +6,13 @@
         Your Reports
     </h2>
 
+    @if(Session::has('report_update'))
+        <div class="pt-2">
+            <div class="alert alert-success" role="alert">
+                {{Session::get('report_update')}}
+            </div>
+        </div>
+    @endif
 
     @if($report->isPending())
         <div class="pt-2">

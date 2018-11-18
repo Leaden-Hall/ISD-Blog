@@ -51,7 +51,7 @@
                </div>
                <div class="info ">
                   <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                  <span>Thanh Nguyen
+                  <span>{{ Auth::user()->username }}
                   {{-- <b class="caret"></b> --}}
                   </span>
                   </a>

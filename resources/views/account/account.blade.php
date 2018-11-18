@@ -2,9 +2,15 @@
 
 @section("content")
     <section>
-        <h2 class="pb-3 mb-4 font-italic border-bottom">
-            Your Account
-        </h2>
+        @if($account->id == Auth::user()->id)
+            <h2 class="pb-3 mb-4 font-italic border-bottom">
+                Your Account
+            </h2>
+        @else
+            <h2 class="pb-3 mb-4 font-italic border-bottom">
+                {{ $account->username }}'s Account
+            </h2>
+        @endif
 
         @if(Session::has("password_update"))
             <div class="alert alert-success p-3 mt-2">
@@ -130,16 +136,18 @@
             </div>
         </div>
 
-        <div class="row mt-3">
-            <div class="col-6">
-                <a href="{{ route('account_edit', $account->id) }}" class="btn btn-outline-primary">Edit Profile</a>
+        @if($account->id == Auth::user()->id)
+            <div class="row mt-3">
+                <div class="col-6">
+                    <a href="{{ route('account_edit', $account->id) }}" class="btn btn-outline-primary">Edit Profile</a>
 
-            </div>
+                </div>
 
-            <div class="col-6 text-right">
-                <a href="{{ route('password', $account->id) }}" class="btn btn-outline-secondary">Change Password</a>
+                <div class="col-6 text-right">
+                    <a href="{{ route('password', $account->id) }}" class="btn btn-outline-secondary">Change Password</a>
+                </div>
             </div>
-        </div>
+        @endif
     </section>
 @endsection
 
@@ -176,11 +184,13 @@
 @endsection
 
 @section("aside-action-bottom")
-    <div class="p-3">
-        <a href="{{ route('account_deactivate', $account->id) }}" class="btn btn-danger btn-lg btn-block"
-           onclick="return confirm('Are you certain that you want to deactivate your account?');">
-            Deactivate Account
-        </a>
-    </div>
+    @if($account->id == Auth::user()->id)
+        <div class="p-3">
+            <a href="{{ route('account_deactivate', $account->id) }}" class="btn btn-danger btn-lg btn-block"
+               onclick="return confirm('Are you certain that you want to deactivate your account?');">
+                Deactivate Account
+            </a>
+        </div>
+    @endif
 @endsection
 
