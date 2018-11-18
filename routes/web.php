@@ -11,17 +11,51 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index')->name('index');
+Route::get('login', 'IndexController@index');
+Route::post('login', 'IndexController@login')->name('login');
+Route::post('logout', 'IndexController@logout')->name('logout');
 
-Auth::routes();
+Route::get('home', 'PostController@index')->name('home');
+Route::get('home/archive/{timestamp}', 'PostController@archive')->name('archive');
+Route::post('home/search', 'PostController@search')->name('search');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('account/edit/{id}', 'AccountController@edit')->name('account_edit');
+Route::post('account/update', 'AccountController@update')->name('account_update');
+Route::get('account/deactivate/{id}', 'AccountController@deactivate')->name('account_deactivate');
+Route::get('account/password/{id}', 'AccountController@password')->name('password');
+Route::post('account/password/{id}', 'AccountController@changePassword')->name('change_password');
+Route::get('account/{id}', 'AccountController@show')->name('account');
+
+Route::get('posts/{user_id}', 'PostController@postList')->name('posts');
+Route::get('post/create', 'PostController@create')->name('post_create');
+Route::post('post/create', 'PostController@save')->name('post_save');
+Route::get('post/edit/{id}', 'PostController@edit')->name('post_edit');
+Route::post('post/edit/{id}', 'PostController@update')->name('post_update');
+Route::get('post/{id}', 'PostController@show')->name('post');
+
+Route::post('comment/save', 'CommentController@save')->name('comment_save');
+Route::post('comment/update', 'CommentController@update')->name('comment_update');
+Route::get('comment/delete/{comment_id}/{post_id}', 'CommentController@delete')->name('comment_delete');
+Route::get('comment/edit/{comment_id}/{post_id}', 'CommentController@edit')->name('comment_edit');
+
+Route::get('events', 'EventController@index')->name('events');
+Route::get('event/{event}', 'EventController@show')->name('event');
+
+Route::get('announcements', 'AnnouncementController@index')->name('announcements');
+Route::get('announcement/{id}', 'AnnouncementController@show')->name('announcement');
+
+Route::get('reports/{status}/{user_id}', 'ReportController@index')->name('reports');
+Route::get('report/{id}', 'ReportController@show')->name('report');
+Route::get('report/add/{type}/{id}', 'ReportController@create')->name('report_add');
+Route::post('report/add/{type}', 'ReportController@save')->name('report_save');
+Route::get('report/cancel/{id}', 'ReportController@cancel')->name('report_cancel');
+Route::post('report/update/{id}', 'ReportController@update')->name('report_update');
+
+
 
 
 Route::prefix('admin')->group(function () {
-
     Route::get('/', 'admin\HomeController@index');
     Route::get('login', 'admin\LoginController@index');
     Route::post('login', 'admin\LoginController@checkLogin');

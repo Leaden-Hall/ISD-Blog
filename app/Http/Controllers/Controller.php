@@ -14,6 +14,7 @@ class Controller extends BaseController
 
     public function saveImage(Request $request, $imageName, $url)
     {
+
     	$fileNameToStore = 'noimage.jpg';
         if ($request->hasfile($imageName)) {
             $fileNameWithExt = $request->file($imageName)->getClientOriginalName();
@@ -22,9 +23,10 @@ class Controller extends BaseController
                 $fileName = substr($fileName,0,10);
             }
             $extension = $request->file($imageName)->getClientOriginalExtension();
+
             $fileNameToStore = $fileName.'_'.time().'_'.$extension;
             $path = $request->file($imageName)->storeAs('public/storage/images/'.$url, $fileNameToStore);
-        } 
+        }
 
         return $fileNameToStore;
     }
