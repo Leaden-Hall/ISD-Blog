@@ -35,7 +35,7 @@
                      <td>
                         <div class="img-container">
                            @php ($image = \App\PostImage::where('posts_id', $post->id)->value('url'))
-                           <img src="{{asset('/storage/assets/admin/img/blog-1.jpg')}}" alt="...">
+                           <img src="{{asset('/storage/storage/images/posts/'.$image)}}" alt="...">
                         </div>
                      </td>
                      <td class="td-name">

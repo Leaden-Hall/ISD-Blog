@@ -47,7 +47,8 @@
             </div>
             <div class="user">
                <div class="photo">
-                  <img src="{{asset('/storage/assets/admin/img/default-avatar.jpg')}}" />
+                  @php ($avatar = Auth::user()->avatar)
+                  <img src="{{asset('/storage/storage/images/users/'.$avatar)}}" />
                </div>
                <div class="info ">
                   <a data-toggle="collapse" href="#collapseExample" class="collapsed">

@@ -107,7 +107,7 @@
                                  <option selected="" disabled="">- Admin -</option>
                                  <option value="1.1">User</option>
                               </select> --}}
-                              {{Form::select('role', ['1' => 'User', '2' => 'Admin'], '1', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
+                              {{Form::select('role', ['2' => 'User', '1' => 'Admin'], '1', array('class' => 'selectpicker', 'data-style' => 'btn-default btn-outline', 'data-menu-style' => 'dropdown-blue'))}}
                            </div>
                         </div>
                      </div>

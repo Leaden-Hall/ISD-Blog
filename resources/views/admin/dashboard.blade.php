@@ -87,7 +87,7 @@
          <div class="card-body ">
             <div class="row">
                <div class="col-5">
-                  <a href="{!! url('admin/notifications'); !!}">
+                  <a href="{!! url('admin/announcements'); !!}">
                      <div class="icon-big text-center icon-warning">
                         <i class="nc-icon nc-notification-70 text-secondary"></i>
                      </div>
@@ -95,12 +95,12 @@
                </div>
                <div class="col-7">
                   <div class="numbers">
-                     <h5 class="card-title">Notification management</h5>
+                     <h5 class="card-title">Announce management</h5>
                   </div>
                </div>
             </div>
          </div>
-         <div class="card-footer ">
+         <div class="card-footer">
             <hr>
             <div class="stats">
                <i class="fa fa-refresh"></i> 20 notifications
