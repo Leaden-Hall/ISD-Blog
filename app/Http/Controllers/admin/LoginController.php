@@ -25,9 +25,7 @@ class LoginController extends Controller
             return redirect()->intended('admin');
         }
 
-        if(Auth::user()->roles_id != 1) {
-            return back()->with('error', 'You are not an administrator');
-        }
+        
         return back()->with('error', 'Email or password is not correct!');
     }
 
