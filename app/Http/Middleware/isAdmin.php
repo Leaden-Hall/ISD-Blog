@@ -22,6 +22,6 @@ class isAdmin
             }
             return redirect('/admin/login')->with('error', 'You are not an administrator');
         }
-        return redirect('/login')->with('error', 'You are not logged in');
+        return redirect('/admin/login')->with('error', 'You are not logged in');
     }
 }
